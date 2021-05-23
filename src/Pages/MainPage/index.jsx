@@ -3,18 +3,20 @@ import PhoneAndroidIcon from "@material-ui/icons/PhoneAndroid";
 import Button from "@material-ui/core/Button";
 import FoodItem from "../../Components/foodItems";
 
-const items = [
+import { makeStyles } from "@material-ui/core/styles";
+
+const categories = [
   {
-    name: "burgers",
+    name: "Burgers",
     items: [
       {
-        name: "cheeseburger",
+        name: "Cheeseburger",
         image: "Images/cheeseburger.jpeg",
         ingredients: ["pan", "carne 125gr", "papas fritas"],
-        size: { simple: "$390", doble: "$470", triples: "$550" },
+        size: { simple: "$390", Doble: "$470", Triples: "$550" },
       },
       {
-        name: "classic",
+        name: "Classic",
         image: "Images/classic.jpeg",
         ingredients: [
           "pan",
@@ -25,11 +27,11 @@ const items = [
           "cebolla",
           "papas fritas",
         ],
-        size: { simple: "$410", doble: "$490" },
+        size: { simple: "$410", Doble: "$490" },
       },
       {
-        name: "sweetmeat",
-        image: "Images.sweetmeat.jpeg",
+        name: "Sweetmeat",
+        image: "Images/sweetmeat.jpg",
         ingredients: [
           "pan",
           "carne 125gr",
@@ -40,7 +42,8 @@ const items = [
         size: { simple: "$400", doble: "$480", triples: "$560" },
       },
       {
-        name: "veggie",
+        name: "Veggie",
+        image: "https://www.hazteveg.com/img/recipes/full/201204/R21-31659.jpg",
         ingredients: [
           "pan",
           "medallon de lenteja",
@@ -51,7 +54,9 @@ const items = [
         size: { simple: "$400", doble: "$480" },
       },
       {
-        name: "grilled onion",
+        name: "Grilled onion",
+        image:
+          "https://grandwichacasa.com.ar/wp-content/uploads/2020/05/burguer-con-cheddar.jpg",
         ingredients: [
           "pan",
           "carne 125gr",
@@ -63,7 +68,9 @@ const items = [
         size: { simple: "$430", doble: "$510", triples: "$590" },
       },
       {
-        name: "bully burger",
+        name: "Bully burger",
+        image:
+          "https://media-cdn.tripadvisor.com/media/photo-s/0e/40/91/8b/hamburguesa-con-queso.jpg",
         ingredients: [
           "pan",
           "carne 125gr",
@@ -78,7 +85,7 @@ const items = [
     ],
   },
   {
-    name: "porciones",
+    name: "Porciones",
     items: [
       {
         name: "Papas fritas",
@@ -87,20 +94,56 @@ const items = [
       },
       {
         name: "Batatas fritas",
+        image:
+          "https://static.paraloscuriosos.com/img/articles/4957/800x800/5774ea13e10d9_miniaturka.jpg",
         size: { L: "$220", XL: "$250" },
       },
       {
-        name: "ESpiral de papas",
+        name: "Espiral de papas",
+        image:
+          "https://www.paulinacocina.net/wp-content/uploads/2016/03/vlcsnap-2016-03-14-13h07m45s251-1-e1457972681209.jpg",
         size: { unidad: "$80", X2: "$150", X3: "$210", X4: "$260", X5: "$300" },
       },
     ],
   },
 ];
 
+const useStyles = makeStyles({
+  dishes: {
+    display: "grid",
+    gridTemplateColumns: "repeat(4, 1fr)",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  category: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+  },
+  page: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+  },
+  categoryTitle: {
+    alignSelf: "flex-start",
+  },
+  button: {
+    margin: "10px",
+  },
+  logo: { width: "400px", height: "500px" },
+});
+
 function MainPage() {
+  const classes = useStyles();
   return (
-    <div>
-      <img alt="logo" src="Images/StakeHouseBurgers.jpg" />
+    <div className={classes.page}>
+      <img
+        className={classes.logo}
+        alt="logo"
+        src="Images/StakeHouseBurgers.jpg"
+      />
       <h1> Stoke House Burgers</h1>
       <span>
         <QueryBuilderIcon />
@@ -109,28 +152,37 @@ function MainPage() {
         <span> 11 7360-7946</span>
       </span>
       <div>
-        <Button variant="contained" color="primary">
+        <Button className={classes.button} variant="contained" color="primary">
           Todas las categorias
         </Button>
-        <Button variant="outlined" color="primary">
+        <Button variant="outlined" className={classes.button} color="primary">
           Burgers
         </Button>
-        <Button variant="outlined" color="primary">
+        <Button variant="outlined" className={classes.button} color="primary">
           Porciones
         </Button>
-        <Button variant="outlined" color="primary">
+        <Button variant="outlined" className={classes.button} color="primary">
           Dips
         </Button>
       </div>
+
       <div>
-        <h2>Burgers</h2>
-        {items.map((item) => (
-          <FoodItem
-            image={item.items.image && item.image}
-            itemName={item.name}
-            ingredients={item.items.ingredients}
-            price={item.items.size}
-          />
+        {categories.map((category) => (
+          <div className={classes.category}>
+            <h1 className={classes.categoryTitle}>{category.name}</h1>
+            <div className={classes.dishes}>
+              {category.items.map((item) => (
+                <FoodItem
+                  image={item.image}
+                  itemName={item.name}
+                  ingredients={
+                    !!item.ingredients ? item.ingredients.join() : ""
+                  }
+                  price={item.size.simple}
+                />
+              ))}
+            </div>
+          </div>
         ))}
       </div>
     </div>
