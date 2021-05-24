@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import FoodItem from "../../Components/foodItems";
 
 import { makeStyles } from "@material-ui/core/styles";
+import { useState } from "react";
 
 const categories = [
   {
@@ -84,6 +85,7 @@ const categories = [
       },
     ],
   },
+  { name: "ensaladas", items: [] },
   {
     name: "Porciones",
     items: [
@@ -149,6 +151,13 @@ const useStyles = makeStyles({
 
 function MainPage() {
   const classes = useStyles();
+
+  const [filter, setFilter] = useState();
+
+  function handleOnClickFilter(value) {
+    setFilter(value);
+  }
+
   return (
     <div className={classes.page}>
       <img
@@ -164,38 +173,47 @@ function MainPage() {
         <span> 11 7360-7946</span>
       </span>
       <div>
-        <Button variant="outlined" className={classes.button} color="primary">
+        <Button
+          variant="outlined"
+          className={classes.button}
+          color="primary"
+          onClick={() => handleOnClickFilter()}
+        >
           Todas las categorias
         </Button>
-        <Button variant="outlined" className={classes.button} color="primary">
-          Burgers
-        </Button>
-        <Button variant="outlined" className={classes.button} color="primary">
-          Porciones
-        </Button>
-        <Button variant="outlined" className={classes.button} color="primary">
-          Dips
-        </Button>
+
+        {categories.map((category) => (
+          <Button
+            variant="outlined"
+            className={classes.button}
+            color="primary"
+            onClick={() => handleOnClickFilter(category.name)}
+          >
+            {category.name}
+          </Button>
+        ))}
       </div>
 
       <div className={classes.containerCategory}>
-        {categories.map((category) => (
-          <div className={classes.category}>
-            <h1 className={classes.categoryTitle}>{category.name}</h1>
-            <div className={classes.dishes}>
-              {category.items.map((item) => (
-                <FoodItem
-                  image={item.image}
-                  itemName={item.name}
-                  ingredients={
-                    !!item.ingredients ? item.ingredients.join() : ""
-                  }
-                  price={item.size.simple}
-                />
-              ))}
+        {categories
+          .filter((category) => !filter || (filter && category.name === filter))
+          .map((category) => (
+            <div className={classes.category}>
+              <h1 className={classes.categoryTitle}>{category.name}</h1>
+              <div className={classes.dishes}>
+                {category.items.map((item) => (
+                  <FoodItem
+                    image={item.image}
+                    itemName={item.name}
+                    ingredients={
+                      !!item.ingredients ? item.ingredients.join() : ""
+                    }
+                    price={item.size.simple}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
