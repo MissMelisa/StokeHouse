@@ -1,7 +1,10 @@
+import { useState } from "react";
+
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import PhoneAndroidIcon from "@material-ui/icons/PhoneAndroid";
 import Button from "@material-ui/core/Button";
-import FoodItem from "../../Components/foodItems";
+import FoodItem from "../../Components/FoodItems";
+import CardItem from "../../Components/CardItem";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -137,6 +140,16 @@ const useStyles = makeStyles({
 
 function MainPage() {
   const classes = useStyles();
+
+  const [open, setOpen] = useState(false);
+  const [detail, setDetail] = useState();
+
+  function handleOnClick(item) {
+    setOpen(true);
+    setDetail(item);
+  }
+  console.log(detail);
+
   return (
     <div className={classes.page}>
       <img
@@ -173,6 +186,7 @@ function MainPage() {
             <div className={classes.dishes}>
               {category.items.map((item) => (
                 <FoodItem
+                  onClick={() => handleOnClick(item)}
                   image={item.image}
                   itemName={item.name}
                   ingredients={
@@ -184,6 +198,18 @@ function MainPage() {
             </div>
           </div>
         ))}
+      </div>
+      <div>
+        {detail && (
+          <CardItem
+            open={open}
+            setOpen={setOpen}
+            image={detail.image}
+            nameItem={detail.name}
+            ingredients={!!detail.ingredients ? detail.ingredients.join() : ""}
+            price={detail.size.simple}
+          />
+        )}
       </div>
     </div>
   );
