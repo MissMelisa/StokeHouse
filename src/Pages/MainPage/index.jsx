@@ -90,19 +90,25 @@ const categories = [
       {
         name: "Papas fritas",
         image: "Images/porcionpapas.jpg",
-        size: { L: "$170", XL: "$200" },
+        size: { simple: "$170", doble: "$200" },
       },
       {
         name: "Batatas fritas",
         image:
           "https://static.paraloscuriosos.com/img/articles/4957/800x800/5774ea13e10d9_miniaturka.jpg",
-        size: { L: "$220", XL: "$250" },
+        size: { simple: "$220", doble: "$250" },
       },
       {
         name: "Espiral de papas",
         image:
           "https://www.paulinacocina.net/wp-content/uploads/2016/03/vlcsnap-2016-03-14-13h07m45s251-1-e1457972681209.jpg",
-        size: { unidad: "$80", X2: "$150", X3: "$210", X4: "$260", X5: "$300" },
+        size: {
+          simple: "$80",
+          doble: "$150",
+          triple: "$210",
+          cuadruple: "$260",
+          quintuple: "$300",
+        },
       },
     ],
   },
@@ -111,7 +117,7 @@ const categories = [
 const useStyles = makeStyles({
   dishes: {
     display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
+    gridTemplateColumns: "repeat(auto-fill,minmax(300px, 1fr))",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -119,6 +125,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
+    width: "100%",
   },
   page: {
     display: "flex",
@@ -128,11 +135,16 @@ const useStyles = makeStyles({
   },
   categoryTitle: {
     alignSelf: "flex-start",
+    marginLeft: "30px",
+    fontFamily: "SFMono-Regular,Menlo,Monaco,Consolas",
+    color: "#32325d",
   },
   button: {
     margin: "10px",
   },
-  logo: { width: "400px", height: "500px" },
+  restaurantName: { color: "#525f7f" },
+  logo: { width: "400px", height: "300px" },
+  containerCategory: { width: "100%" },
 });
 
 function MainPage() {
@@ -142,9 +154,9 @@ function MainPage() {
       <img
         className={classes.logo}
         alt="logo"
-        src="Images/StakeHouseBurgers.jpg"
+        src="https://i.pinimg.com/originals/e2/98/11/e29811d3411c6696130a123c32727d9a.jpg"
       />
-      <h1> Stoke House Burgers</h1>
+      <h1 className={classes.restaurantName}> Stoke House Burgers</h1>
       <span>
         <QueryBuilderIcon />
         <span>8 P.M. - 12 P.M.</span>
@@ -152,7 +164,7 @@ function MainPage() {
         <span> 11 7360-7946</span>
       </span>
       <div>
-        <Button className={classes.button} variant="contained" color="primary">
+        <Button variant="outlined" className={classes.button} color="primary">
           Todas las categorias
         </Button>
         <Button variant="outlined" className={classes.button} color="primary">
@@ -166,7 +178,7 @@ function MainPage() {
         </Button>
       </div>
 
-      <div>
+      <div className={classes.containerCategory}>
         {categories.map((category) => (
           <div className={classes.category}>
             <h1 className={classes.categoryTitle}>{category.name}</h1>
