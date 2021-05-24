@@ -142,7 +142,7 @@ const useStyles = makeStyles({
     color: "#32325d",
   },
   button: {
-    margin: "10px",
+    margin: "8px",
   },
   restaurantName: { color: "#525f7f" },
   logo: { width: "400px", height: "300px" },
