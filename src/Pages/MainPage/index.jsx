@@ -174,7 +174,7 @@ function MainPage() {
       </span>
       <div>
         <Button
-          variant="outlined"
+          variant={filter ? "outlined" : "contained"}
           className={classes.button}
           color="primary"
           onClick={() => handleOnClickFilter()}
@@ -184,7 +184,7 @@ function MainPage() {
 
         {categories.map((category) => (
           <Button
-            variant="outlined"
+            variant={filter === category.name ? "contained" : "outlined"}
             className={classes.button}
             color="primary"
             onClick={() => handleOnClickFilter(category.name)}
