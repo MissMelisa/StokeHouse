@@ -2,6 +2,7 @@ import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import PhoneAndroidIcon from "@material-ui/icons/PhoneAndroid";
 import Button from "@material-ui/core/Button";
 import FoodItem from "../../Components/foodItems";
+import { Typography } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
@@ -138,8 +139,10 @@ const useStyles = makeStyles({
   categoryTitle: {
     alignSelf: "flex-start",
     marginLeft: "30px",
-    fontFamily: "SFMono-Regular,Menlo,Monaco,Consolas",
+
     color: "#32325d",
+    fontWeight: "bolder",
+    fontSize: "30px",
   },
   button: {
     margin: "8px",
@@ -165,7 +168,7 @@ function MainPage() {
         alt="logo"
         src="https://i.pinimg.com/originals/e2/98/11/e29811d3411c6696130a123c32727d9a.jpg"
       />
-      <h1 className={classes.restaurantName}> Stoke House Burgers</h1>
+      <Typography> Stoke House Burgers</Typography>
       <span>
         <QueryBuilderIcon />
         <span>8 P.M. - 12 P.M.</span>
@@ -181,17 +184,18 @@ function MainPage() {
         >
           Todas las categorias
         </Button>
-
-        {categories.map((category) => (
-          <Button
-            variant={filter === category.name ? "contained" : "outlined"}
-            className={classes.button}
-            color="primary"
-            onClick={() => handleOnClickFilter(category.name)}
-          >
-            {category.name}
-          </Button>
-        ))}
+        <div>
+          {categories.map((category) => (
+            <Button
+              variant={filter === category.name ? "contained" : "outlined"}
+              className={classes.button}
+              color="primary"
+              onClick={() => handleOnClickFilter(category.name)}
+            >
+              {category.name}
+            </Button>
+          ))}
+        </div>
       </div>
 
       <div className={classes.containerCategory}>
@@ -199,7 +203,9 @@ function MainPage() {
           .filter((category) => !filter || (filter && category.name === filter))
           .map((category) => (
             <div className={classes.category}>
-              <h1 className={classes.categoryTitle}>{category.name}</h1>
+              <Typography className={classes.categoryTitle}>
+                {category.name}
+              </Typography>
               <div className={classes.dishes}>
                 {category.items.map((item) => (
                   <FoodItem
