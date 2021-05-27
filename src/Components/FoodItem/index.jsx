@@ -10,8 +10,10 @@ const useStyles = makeStyles({
     margin: "30px",
   },
   itemName: {
-    fontSize: "25px",
+    fontSize: "1rem",
     fontWeight: "bolder",
+    fontFamily: "Open Sans,sans-serif",
+    marginTop: "10px",
   },
   ingredients: {
     color: "grey",

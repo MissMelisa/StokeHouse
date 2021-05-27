@@ -3,8 +3,10 @@ import { useState } from "react";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import PhoneAndroidIcon from "@material-ui/icons/PhoneAndroid";
 import Button from "@material-ui/core/Button";
-import FoodItem from "../../Components/FoodItems";
+import FoodItem from "../../Components/FoodItem";
 import CardItem from "../../Components/CardItem";
+
+import { Typography } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -87,25 +89,32 @@ const categories = [
       },
     ],
   },
+  { name: "ensaladas", items: [] },
   {
     name: "Porciones",
     items: [
       {
         name: "Papas fritas",
         image: "Images/porcionpapas.jpg",
-        size: { L: "$170", XL: "$200" },
+        size: { simple: "$170", doble: "$200" },
       },
       {
         name: "Batatas fritas",
         image:
           "https://static.paraloscuriosos.com/img/articles/4957/800x800/5774ea13e10d9_miniaturka.jpg",
-        size: { L: "$220", XL: "$250" },
+        size: { simple: "$220", doble: "$250" },
       },
       {
         name: "Espiral de papas",
         image:
           "https://www.paulinacocina.net/wp-content/uploads/2016/03/vlcsnap-2016-03-14-13h07m45s251-1-e1457972681209.jpg",
-        size: { unidad: "$80", X2: "$150", X3: "$210", X4: "$260", X5: "$300" },
+        size: {
+          simple: "$80",
+          doble: "$150",
+          triple: "$210",
+          cuadruple: "$260",
+          quintuple: "$300",
+        },
       },
     ],
   },
@@ -114,7 +123,7 @@ const categories = [
 const useStyles = makeStyles({
   dishes: {
     display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
+    gridTemplateColumns: "repeat(auto-fill,minmax(300px, 1fr))",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -122,6 +131,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
+    width: "100%",
   },
   page: {
     display: "flex",
@@ -131,11 +141,18 @@ const useStyles = makeStyles({
   },
   categoryTitle: {
     alignSelf: "flex-start",
+    marginLeft: "30px",
+
+    color: "#32325d",
+    fontWeight: "bolder",
+    fontSize: "30px",
   },
   button: {
-    margin: "10px",
+    margin: "8px",
   },
-  logo: { width: "400px", height: "500px" },
+  restaurantName: { color: "#525f7f" },
+  logo: { width: "400px", height: "300px" },
+  containerCategory: { width: "100%" },
 });
 
 function MainPage() {
@@ -148,16 +165,21 @@ function MainPage() {
     setOpen(true);
     setDetail(item);
   }
-  console.log(detail);
+
+  const [filter, setFilter] = useState();
+
+  function handleOnClickFilter(value) {
+    setFilter(value);
+  }
 
   return (
     <div className={classes.page}>
       <img
         className={classes.logo}
         alt="logo"
-        src="Images/StakeHouseBurgers.jpg"
+        src="https://i.pinimg.com/originals/e2/98/11/e29811d3411c6696130a123c32727d9a.jpg"
       />
-      <h1> Stoke House Burgers</h1>
+      <Typography> Stoke House Burgers</Typography>
       <span>
         <QueryBuilderIcon />
         <span>8 P.M. - 12 P.M.</span>
@@ -165,39 +187,50 @@ function MainPage() {
         <span> 11 7360-7946</span>
       </span>
       <div>
-        <Button className={classes.button} variant="contained" color="primary">
+        <Button
+          variant={filter ? "outlined" : "contained"}
+          className={classes.button}
+          color="primary"
+          onClick={() => handleOnClickFilter()}
+        >
           Todas las categorias
         </Button>
-        <Button variant="outlined" className={classes.button} color="primary">
-          Burgers
-        </Button>
-        <Button variant="outlined" className={classes.button} color="primary">
-          Porciones
-        </Button>
-        <Button variant="outlined" className={classes.button} color="primary">
-          Dips
-        </Button>
+        <div>
+          {categories.map((category) => (
+            <Button
+              variant={filter === category.name ? "contained" : "outlined"}
+              className={classes.button}
+              color="primary"
+              onClick={() => handleOnClickFilter(category.name)}
+            >
+              {category.name}
+            </Button>
+          ))}
+        </div>
       </div>
 
-      <div>
-        {categories.map((category) => (
-          <div className={classes.category}>
-            <h1 className={classes.categoryTitle}>{category.name}</h1>
-            <div className={classes.dishes}>
-              {category.items.map((item) => (
-                <FoodItem
-                  onClick={() => handleOnClick(item)}
-                  image={item.image}
-                  itemName={item.name}
-                  ingredients={
-                    !!item.ingredients ? item.ingredients.join() : ""
-                  }
-                  price={item.size.simple}
-                />
-              ))}
+      <div className={classes.containerCategory}>
+        {categories
+          .filter((category) => !filter || (filter && category.name === filter))
+          .map((category) => (
+            <div className={classes.category}>
+              <Typography className={classes.categoryTitle}>
+                {category.name}
+              </Typography>
+              <div className={classes.dishes}>
+                {category.items.map((item) => (
+                  <FoodItem
+                    image={item.image}
+                    itemName={item.name}
+                    ingredients={
+                      !!item.ingredients ? item.ingredients.join() : ""
+                    }
+                    price={item.size.simple}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
       <div>
         {detail && (
