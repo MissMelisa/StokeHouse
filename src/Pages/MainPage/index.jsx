@@ -1,13 +1,9 @@
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import PhoneAndroidIcon from "@material-ui/icons/PhoneAndroid";
 import Button from "@material-ui/core/Button";
-<<<<<<< Updated upstream
-import FoodItem from "../../Components/foodItems";
 import { Typography } from "@material-ui/core";
-=======
 import FoodItem from "../../Components/FoodItem";
 import CardItem from "../../Components/CardItem";
->>>>>>> Stashed changes
 
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
@@ -98,36 +94,20 @@ const categories = [
       {
         name: "Papas fritas",
         image: "Images/porcionpapas.jpg",
-<<<<<<< Updated upstream
-        size: { simple: "$170", doble: "$200" },
-=======
         ingredients: ["papas", "sal"],
         sizes: { L: "$170", XL: "$200" },
->>>>>>> Stashed changes
       },
       {
         name: "Batatas fritas",
         image:
           "https://static.paraloscuriosos.com/img/articles/4957/800x800/5774ea13e10d9_miniaturka.jpg",
-<<<<<<< Updated upstream
-        size: { simple: "$220", doble: "$250" },
-=======
         ingredients: ["batatas", "sal"],
         sizes: { L: "$220", XL: "$250" },
->>>>>>> Stashed changes
       },
       {
         name: "Espiral de papas",
         image:
           "https://www.paulinacocina.net/wp-content/uploads/2016/03/vlcsnap-2016-03-14-13h07m45s251-1-e1457972681209.jpg",
-<<<<<<< Updated upstream
-        size: {
-          simple: "$80",
-          doble: "$150",
-          triple: "$210",
-          cuadruple: "$260",
-          quintuple: "$300",
-=======
         ingredients: ["papas", "sal"],
         sizes: {
           unidad: "$80",
@@ -135,7 +115,6 @@ const categories = [
           X3: "$210",
           X4: "$260",
           X5: "$300",
->>>>>>> Stashed changes
         },
       },
     ],
@@ -181,6 +160,13 @@ function MainPage() {
   const classes = useStyles();
 
   const [filter, setFilter] = useState();
+  const [open, setOpen] = useState(false);
+  const [detail, setDetail] = useState();
+
+  function handleOnClick(item) {
+    setOpen(true);
+    setDetail(item);
+  }
 
   function handleOnClickFilter(value) {
     setFilter(value);
@@ -223,7 +209,6 @@ function MainPage() {
         </div>
       </div>
 
-<<<<<<< Updated upstream
       <div className={classes.containerCategory}>
         {categories
           .filter((category) => !filter || (filter && category.name === filter))
@@ -240,32 +225,12 @@ function MainPage() {
                     ingredients={
                       !!item.ingredients ? item.ingredients.join() : ""
                     }
-                    price={item.size.simple}
+                    sizes={item.sizes}
                   />
                 ))}
               </div>
             </div>
           ))}
-=======
-      <div>
-        {categories.map((category) => (
-          <div className={classes.category}>
-            <h1 className={classes.categoryTitle}>{category.name}</h1>
-            <div className={classes.dishes}>
-              {category.items.map((item) => (
-                <FoodItem
-                  onClick={() => handleOnClick(item)}
-                  image={item.image}
-                  itemName={item.name}
-                  ingredients={
-                    !!item.ingredients ? item.ingredients.join() : ""
-                  }
-                  price={item.sizes.simple}
-                />
-              ))}
-            </div>
-          </div>
-        ))}
       </div>
       <div>
         {detail && (
@@ -279,7 +244,6 @@ function MainPage() {
             onClickAddItem={alert}
           />
         )}
->>>>>>> Stashed changes
       </div>
     </div>
   );
