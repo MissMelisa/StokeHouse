@@ -1,3 +1,4 @@
+import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -37,16 +38,15 @@ function FoodItem({ image, itemName, ingredients, price, onClick }) {
         onClick={onClick}
       />
 
-      <span className={classes.itemName}>{itemName}</span>
-
-      <span className={classes.ingredients}>
+      <Typography className={classes.itemName}>{itemName}</Typography>
+      <Typography className={classes.ingredients}>
         {ingredients.length >= 30 ? (
-          <span> {ingredients.substring(0, 30)}... </span>
+          <Typography> {ingredients.substring(0, 30)}... </Typography>
         ) : (
-          <span>{ingredients}</span>
+          <Typography>{ingredients}</Typography>
         )}
-      </span>
-      <span>{price}</span>
+      </Typography>
+      <Typography>{price}</Typography>
     </div>
   );
 }
