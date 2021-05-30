@@ -1,8 +1,9 @@
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import PhoneAndroidIcon from "@material-ui/icons/PhoneAndroid";
 import Button from "@material-ui/core/Button";
-import FoodItem from "../../Components/foodItems";
 import { Typography } from "@material-ui/core";
+import FoodItem from "../../Components/FoodItem";
+import CardItem from "../../Components/CardItem";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
@@ -15,7 +16,7 @@ const categories = [
         name: "Cheeseburger",
         image: "Images/cheeseburger.jpeg",
         ingredients: ["pan", "carne 125gr", "papas fritas"],
-        size: { simple: "$390", Doble: "$470", Triples: "$550" },
+        sizes: { simple: "$390", Doble: "$470", Triples: "$550" },
       },
       {
         name: "Classic",
@@ -29,7 +30,7 @@ const categories = [
           "cebolla",
           "papas fritas",
         ],
-        size: { simple: "$410", Doble: "$490" },
+        sizes: { simple: "$410", Doble: "$490" },
       },
       {
         name: "Sweetmeat",
@@ -41,7 +42,7 @@ const categories = [
           "cheddar",
           "papas fritas",
         ],
-        size: { simple: "$400", doble: "$480", triples: "$560" },
+        sizes: { simple: "$400", doble: "$480", triples: "$560" },
       },
       {
         name: "Veggie",
@@ -53,7 +54,7 @@ const categories = [
           "lechuga",
           "papas fritas",
         ],
-        size: { simple: "$400", doble: "$480" },
+        sizes: { simple: "$400", doble: "$480" },
       },
       {
         name: "Grilled onion",
@@ -67,7 +68,7 @@ const categories = [
           "cebolla grillada",
           "papas fritas",
         ],
-        size: { simple: "$430", doble: "$510", triples: "$590" },
+        sizes: { simple: "$430", doble: "$510", triples: "$590" },
       },
       {
         name: "Bully burger",
@@ -82,7 +83,7 @@ const categories = [
           "bacon barbacoa",
           "papas fritas",
         ],
-        size: { simple: "$490", doble: "$580", triples: "$660" },
+        sizes: { simple: "$490", doble: "$580", triples: "$660" },
       },
     ],
   },
@@ -93,24 +94,27 @@ const categories = [
       {
         name: "Papas fritas",
         image: "Images/porcionpapas.jpg",
-        size: { simple: "$170", doble: "$200" },
+        ingredients: ["papas", "sal"],
+        sizes: { L: "$170", XL: "$200" },
       },
       {
         name: "Batatas fritas",
         image:
           "https://static.paraloscuriosos.com/img/articles/4957/800x800/5774ea13e10d9_miniaturka.jpg",
-        size: { simple: "$220", doble: "$250" },
+        ingredients: ["batatas", "sal"],
+        sizes: { L: "$220", XL: "$250" },
       },
       {
         name: "Espiral de papas",
         image:
           "https://www.paulinacocina.net/wp-content/uploads/2016/03/vlcsnap-2016-03-14-13h07m45s251-1-e1457972681209.jpg",
-        size: {
-          simple: "$80",
-          doble: "$150",
-          triple: "$210",
-          cuadruple: "$260",
-          quintuple: "$300",
+        ingredients: ["papas", "sal"],
+        sizes: {
+          unidad: "$80",
+          X2: "$150",
+          X3: "$210",
+          X4: "$260",
+          X5: "$300",
         },
       },
     ],
@@ -156,6 +160,13 @@ function MainPage() {
   const classes = useStyles();
 
   const [filter, setFilter] = useState();
+  const [open, setOpen] = useState(false);
+  const [detail, setDetail] = useState();
+
+  function handleOnClick(item) {
+    setOpen(true);
+    setDetail(item);
+  }
 
   function handleOnClickFilter(value) {
     setFilter(value);
@@ -214,12 +225,25 @@ function MainPage() {
                     ingredients={
                       !!item.ingredients ? item.ingredients.join() : ""
                     }
-                    price={item.size.simple}
+                    sizes={item.sizes}
                   />
                 ))}
               </div>
             </div>
           ))}
+      </div>
+      <div>
+        {detail && (
+          <CardItem
+            open={open}
+            setOpen={setOpen}
+            image={detail.image}
+            nameItem={detail.name}
+            ingredients={detail.ingredients}
+            sizes={detail.sizes}
+            onClickAddItem={alert}
+          />
+        )}
       </div>
     </div>
   );

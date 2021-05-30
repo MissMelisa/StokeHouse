@@ -10,10 +10,8 @@ const useStyles = makeStyles({
     margin: "30px",
   },
   itemName: {
-    fontSize: "1rem",
+    fontSize: "25px",
     fontWeight: "bolder",
-    fontFamily: "Open Sans,sans-serif",
-    marginTop: "10px",
   },
   ingredients: {
     color: "grey",
@@ -25,13 +23,20 @@ const useStyles = makeStyles({
   },
 });
 
-function FoodItem({ image, itemName, ingredients, price }) {
+function FoodItem({ image, itemName, ingredients, price, onClick }) {
   const classes = useStyles();
 
   return (
     <div className={classes.containerItem}>
-      <img src={image} alt={itemName} className={classes.image} />
+      <img
+        src={image}
+        alt={itemName}
+        className={classes.image}
+        onClick={onClick}
+      />
+
       <span className={classes.itemName}>{itemName}</span>
+
       <span className={classes.ingredients}>
         {ingredients.length >= 30 ? (
           <span> {ingredients.substring(0, 30)}... </span>
