@@ -1,12 +1,13 @@
+import { useState } from "react";
+
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import PhoneAndroidIcon from "@material-ui/icons/PhoneAndroid";
 import Button from "@material-ui/core/Button";
+import CardItem from "../../Components/CardItem";
 import { Typography } from "@material-ui/core";
 import FoodItem from "../../Components/FoodItem";
-import CardItem from "../../Components/CardItem";
 
 import { makeStyles } from "@material-ui/core/styles";
-import { useState } from "react";
 
 const categories = [
   {
@@ -158,12 +159,12 @@ const useStyles = makeStyles({
 
 function MainPage() {
   const classes = useStyles();
-
   const [filter, setFilter] = useState();
   const [open, setOpen] = useState(false);
   const [detail, setDetail] = useState();
 
   function handleOnClick(item) {
+    console.log(item);
     setOpen(true);
     setDetail(item);
   }
@@ -220,6 +221,7 @@ function MainPage() {
               <div className={classes.dishes}>
                 {category.items.map((item) => (
                   <FoodItem
+                    onClick={() => handleOnClick(item)}
                     image={item.image}
                     itemName={item.name}
                     ingredients={

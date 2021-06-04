@@ -4,10 +4,10 @@ import {
   Button,
   ButtonGroup,
   Checkbox,
+  Dialog,
   FormControlLabel,
   Typography,
 } from "@material-ui/core";
-import Modal from "@material-ui/core/Modal";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -37,6 +37,11 @@ const useStyles = makeStyles({
   nameItem: {
     fontSize: "25px",
     fontWeight: "bolder",
+    alignSelf: "flex-start",
+    margin: "20px",
+  },
+  itemDetails: {
+    color: "#525f7f",
     margin: "20px",
   },
   spanIngredients: {
@@ -51,7 +56,6 @@ const useStyles = makeStyles({
     backgroundColor: "#f4f5f7 !important",
   },
   span: { padding: "30px", display: "flex", flexDirection: "column" },
-
   checkbox: {
     display: "flex",
     alignItems: "center",
@@ -106,9 +110,15 @@ function CardItem({
     const orderItem = { nameItem, selected, excludedItems };
     onClickAddItem(orderItem);
   }
+  console.log(ingredients, "lll");
 
   return (
-    <Modal open={open} onClose={handleClose} className={classes.modal}>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      className={classes.modal}
+      maxWidth="lg"
+    >
       <div className={classes.modalData}>
         <div className={classes.title}>
           <Typography className={classes.nameItem}>{nameItem}</Typography>
@@ -156,11 +166,14 @@ function CardItem({
             </div>
           </div>
         </div>
+      </div>
+
+      <div>
         <Button variant="contained" color="primary" onClick={handleOnClickAdd}>
           Agregar
         </Button>
       </div>
-    </Modal>
+    </Dialog>
   );
 }
 
