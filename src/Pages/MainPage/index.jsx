@@ -164,6 +164,7 @@ function MainPage() {
   const [detail, setDetail] = useState();
 
   function handleOnClick(item) {
+    console.log(item);
     setOpen(true);
     setDetail(item);
   }
@@ -217,9 +218,10 @@ function MainPage() {
               <Typography className={classes.categoryTitle}>
                 {category.name}
               </Typography>
-              <div className={classes.dishes} onClick={handleOnClick}>
+              <div className={classes.dishes}>
                 {category.items.map((item) => (
                   <FoodItem
+                    onClick={() => handleOnClick(item)}
                     image={item.image}
                     itemName={item.name}
                     ingredients={
@@ -239,7 +241,7 @@ function MainPage() {
             setOpen={setOpen}
             image={detail.image}
             nameItem={detail.name}
-            ingredients={!!detail.ingredients ? detail.ingredients.join() : ""}
+            ingredients={detail.ingredients}
             sizes={detail.sizes}
             onClickAddItem={alert}
           />

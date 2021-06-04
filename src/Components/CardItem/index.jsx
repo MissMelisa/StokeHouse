@@ -110,19 +110,16 @@ function CardItem({
     const orderItem = { nameItem, selected, excludedItems };
     onClickAddItem(orderItem);
   }
+  console.log(ingredients, "lll");
 
   return (
-    <Dialog open={open} onClose={handleClose} className={classes.modal}>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      className={classes.modal}
+      maxWidth="lg"
+    >
       <div className={classes.modalData}>
-        <Typography className={classes.nameItem}>{nameItem}</Typography>
-        <div className={classes.data}>
-          <img src={image} alt={nameItem} className={classes.image} />
-          <div className={classes.span}>
-            <span className={classes.itemDetails}>Simple: {sizes}</span>
-            <span className={classes.itemDetails}>{ingredients}</span>
-          </div>
-        </div>
-
         <div className={classes.title}>
           <Typography className={classes.nameItem}>{nameItem}</Typography>
           <span className={classes.spanTitle}>Ingredientes </span>
