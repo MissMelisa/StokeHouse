@@ -8,6 +8,7 @@ import { Typography } from "@material-ui/core";
 import FoodItem from "../../Components/FoodItem";
 
 import { makeStyles } from "@material-ui/core/styles";
+import ShoppingCart from "../../Components/Cart";
 
 const categories = [
   {
@@ -155,22 +156,36 @@ const useStyles = makeStyles({
   restaurantName: { color: "#525f7f" },
   logo: { width: "400px", height: "300px" },
   containerCategory: { width: "100%" },
+  shoppingCart: { width: "500px", height: "1000px" },
+  businessName: { fontWeight: "bolder", fontSize: "30px" },
 });
 
 function MainPage() {
   const classes = useStyles();
   const [filter, setFilter] = useState();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState({ openCart: false, openCartItem: false });
   const [detail, setDetail] = useState();
+  const [cart, setCart] = useState([]);
+  const [quantity, setQuantity] = useState();
 
   function handleOnClick(item) {
-    console.log(item);
-    setOpen(true);
+    handleSetOpen("openCartItem");
     setDetail(item);
   }
 
   function handleOnClickFilter(value) {
     setFilter(value);
+  }
+
+  function handleOnClickCart(orderItem) {
+    setCart([...cart, orderItem]);
+    handleSetOpen("openCart");
+  }
+
+  function handleSetOpen(dialog) {
+    setOpen((prevState) => {
+      return { ...prevState, [dialog]: !prevState[dialog] };
+    });
   }
 
   return (
@@ -180,7 +195,10 @@ function MainPage() {
         alt="logo"
         src="https://i.pinimg.com/originals/e2/98/11/e29811d3411c6696130a123c32727d9a.jpg"
       />
-      <Typography> Stoke House Burgers</Typography>
+      <Typography className={classes.businessName}>
+        {" "}
+        Stoke House Burgers
+      </Typography>
       <span>
         <QueryBuilderIcon />
         <span>8 P.M. - 12 P.M.</span>
@@ -237,13 +255,26 @@ function MainPage() {
       <div>
         {detail && (
           <CardItem
-            open={open}
-            setOpen={setOpen}
+            quantity={quantity}
+            setQuantity={setQuantity}
+            open={open.openCartItem}
+            setOpen={() => handleSetOpen("openCartItem")}
             image={detail.image}
             nameItem={detail.name}
             ingredients={detail.ingredients}
             sizes={detail.sizes}
-            onClickAddItem={alert}
+            onClickAddItem={handleOnClickCart}
+          />
+        )}
+      </div>
+      <div className={classes.shoppingCart}>
+        {cart && (
+          <ShoppingCart
+            open={open.openCart}
+            setOpen={() => handleSetOpen("openCart")}
+            cart={cart}
+            quantity={quantity}
+            setQuantity={setQuantity}
           />
         )}
       </div>

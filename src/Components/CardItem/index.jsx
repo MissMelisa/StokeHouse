@@ -6,6 +6,7 @@ import {
   Checkbox,
   Dialog,
   FormControlLabel,
+  TextField,
   Typography,
 } from "@material-ui/core";
 
@@ -21,6 +22,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
+    padding: "20px",
   },
   image: {
     margin: "20px",
@@ -33,6 +35,8 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    maxHeight: "700px",
+    height: "100%",
   },
   nameItem: {
     fontSize: "25px",
@@ -71,7 +75,20 @@ const useStyles = makeStyles({
     fontWeight: "bolder",
     marginBottom: "6px",
   },
+  button: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "20px",
+    backgroundColor: "#f4f5f7 !important",
+  },
   title: { display: "flex", alignItems: "center", flexDirection: "column" },
+  inputNumber: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+  },
 });
 
 function CardItem({
@@ -82,13 +99,16 @@ function CardItem({
   ingredients,
   nameItem,
   onClickAddItem,
+  quantity,
+  setQuantity,
 }) {
   const classes = useStyles();
 
   const [excludedItems, setExludedItems] = useState([]);
-  const [selected, setSelected] = useState();
+  const [selectedSize, setSelectedSize] = useState({});
 
   const handleClose = () => {
+    console.log(open);
     setOpen(false);
   };
   const handleChange = (event) => {
@@ -103,14 +123,24 @@ function CardItem({
   };
 
   function handleOnClickSelected(selected) {
-    setSelected(selected);
+    const [size, price] = selected;
+    setSelectedSize({ size, price });
   }
 
   function handleOnClickAdd() {
-    const orderItem = { nameItem, selected, excludedItems };
+    const orderItem = {
+      nameItem,
+      selectedSize,
+      excludedItems,
+      image,
+      quantity,
+    };
     onClickAddItem(orderItem);
+    setOpen(false);
   }
-  console.log(ingredients, "lll");
+  function handleOnChangeQuantity(ev) {
+    setQuantity(ev.target.value);
+  }
 
   return (
     <Dialog
@@ -153,22 +183,31 @@ function CardItem({
                   color="primary"
                   aria-label="large outlined primary button group"
                 >
-                  {Object.keys(sizes).map((size) => (
-                    <Button
-                      onClick={() => handleOnClickSelected(size)}
-                      color={size === selected && "secondary"}
-                    >
-                      {size}
-                    </Button>
-                  ))}
+                  {Object.entries(sizes).map((size) => {
+                    const [key, value] = size;
+                    return (
+                      <Button
+                        onClick={() => handleOnClickSelected(size)}
+                        color={key === selectedSize.size && "secondary"}
+                      >
+                        {key}
+                      </Button>
+                    );
+                  })}
                 </ButtonGroup>
               </div>
             </div>
+
+            <TextField
+              type="number"
+              label="Cantidad"
+              onChange={handleOnChangeQuantity}
+            />
           </div>
         </div>
       </div>
 
-      <div>
+      <div className={classes.button}>
         <Button variant="contained" color="primary" onClick={handleOnClickAdd}>
           Agregar
         </Button>
