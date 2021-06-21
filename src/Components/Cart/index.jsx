@@ -12,17 +12,37 @@ const useStyles = makeStyles({
     maxWidth: "400px",
   },
   paperAnchorRight: { width: "100%", maxWidth: "400px" },
-  button: { margin: "20px" },
+
+  button: { margin: "20px", cursor: "pointer" },
+  total: {
+    border: "1px solid #d2d6dc ",
+    minHeight: "60px",
+    display: "flex",
+    alignItems: "center",
+    fontWeight: "bolder",
+    margin: "16px",
+    justifyContent: "center",
+  },
   titleDialog: { alignSelf: "center", fontSize: "20px", fontWeight: "bolder" },
 });
 
-function Cart({ open, setOpen, cart, updateQuantity, handleOnDelete }) {
+function Cart({
+  open,
+  setOpen,
+  cart,
+  updateQuantity,
+  handleOnDelete,
+  subTotal,
+}) {
   const classes = useStyles();
 
   const handleClose = () => {
     setOpen(true);
   };
 
+  function handleOnClickFinishedBuying() {}
+
+  console.log(cart);
   return (
     <Drawer
       anchor="right"
@@ -47,7 +67,19 @@ function Cart({ open, setOpen, cart, updateQuantity, handleOnDelete }) {
           excludedItems={item.excludedItems}
         />
       ))}
-      <Button color="primary" variant="contained" className={classes.button}>
+      <Typography className={classes.total}>
+        Total: $
+        {cart.reduce((subTotal, cart) => {
+          subTotal = subTotal + cart.quantity * cart.selectedSize.price;
+          return subTotal;
+        }, 0)}
+      </Typography>
+      <Button
+        color="primary"
+        variant="contained"
+        className={classes.button}
+        onClick={handleOnClickFinishedBuying}
+      >
         Terminar comprar
       </Button>
     </Drawer>

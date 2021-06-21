@@ -16,6 +16,8 @@ const useStyles = makeStyles({
   modal: {
     width: "100%",
     height: "100%",
+    minWidth: "300px",
+    minHeight: "600px",
     border: "0 solid #d2d6dc",
     backgroundColor: "white",
     display: "flex",

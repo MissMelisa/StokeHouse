@@ -6,13 +6,21 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   image: { width: "200px", height: "150px" },
-  itemData: { fontSize: "15px" },
+  itemData: {
+    fontSize: "15px",
+
+    color: "#32325d",
+    fontWeight: "bolder",
+  },
   orderItemContainer: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     maxWidth: "400px",
     maxHeight: "1000px",
+  },
+  buttonGroup: {
+    margin: "10px",
   },
 });
 
@@ -22,7 +30,7 @@ function OrderItem({
   excludedItems,
   image,
   price,
-  subTotal,
+
   size,
   quantity,
   updateQuantity,
@@ -41,10 +49,14 @@ function OrderItem({
         <Typography className={classes.itemData}>{nameItem}</Typography>
         <Typography className={classes.itemData}>{excludedItems}</Typography>
         <Typography className={classes.itemData}>{size}</Typography>
-        <Typography>
-          {quantity}X ${price * quantity}
+        <Typography className={classes.itemData}>
+          {quantity} X ${price * quantity}
         </Typography>
-        <ButtonGroup size="small" aria-label="small outlined button group">
+        <ButtonGroup
+          className={classes.buttonGroup}
+          size="small"
+          aria-label="small outlined button group"
+        >
           <Button onClick={() => handleOnClickAdd(1)}>
             <AddIcon />
           </Button>
@@ -55,8 +67,6 @@ function OrderItem({
             <DeleteForeverIcon />
           </Button>
         </ButtonGroup>
-
-        <Typography className={classes.itemData}>{subTotal}</Typography>
       </div>
     </>
   );

@@ -5,8 +5,8 @@ const useStyles = makeStyles({
   containerItem: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
+    alignItems: "center",
+    justifyContent: "center",
     width: "100%",
     margin: "30px",
   },
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
   ingredients: {
     color: "grey",
-    alignSelf: "flex-start",
+    alignSelf: "center",
   },
   image: {
     width: "250px",
