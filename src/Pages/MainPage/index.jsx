@@ -8,19 +8,21 @@ import { Typography } from "@material-ui/core";
 import FoodItem from "../../Components/FoodItem";
 
 import { makeStyles } from "@material-ui/core/styles";
-import ShoppingCart from "../../Components/Cart";
+import Cart from "../../Components/Cart";
 
 const categories = [
   {
     name: "Burgers",
     items: [
       {
+        id: 1,
         name: "Cheeseburger",
         image: "Images/cheeseburger.jpeg",
         ingredients: ["pan", "carne 125gr", "papas fritas"],
-        sizes: { simple: "$390", Doble: "$470", Triples: "$550" },
+        sizes: { simple: 390, Doble: 470, Triples: 550 },
       },
       {
+        id: 2,
         name: "Classic",
         image: "Images/classic.jpeg",
         ingredients: [
@@ -32,9 +34,10 @@ const categories = [
           "cebolla",
           "papas fritas",
         ],
-        sizes: { simple: "$410", Doble: "$490" },
+        sizes: { simple: 410, Doble: 490 },
       },
       {
+        id: 3,
         name: "Sweetmeat",
         image: "Images/sweetmeat.jpg",
         ingredients: [
@@ -44,9 +47,10 @@ const categories = [
           "cheddar",
           "papas fritas",
         ],
-        sizes: { simple: "$400", doble: "$480", triples: "$560" },
+        sizes: { simple: 400, doble: 480, triples: 560 },
       },
       {
+        id: 4,
         name: "Veggie",
         image: "https://www.hazteveg.com/img/recipes/full/201204/R21-31659.jpg",
         ingredients: [
@@ -56,9 +60,10 @@ const categories = [
           "lechuga",
           "papas fritas",
         ],
-        sizes: { simple: "$400", doble: "$480" },
+        sizes: { simple: 400, doble: 480 },
       },
       {
+        id: 5,
         name: "Grilled onion",
         image:
           "https://grandwichacasa.com.ar/wp-content/uploads/2020/05/burguer-con-cheddar.jpg",
@@ -70,9 +75,10 @@ const categories = [
           "cebolla grillada",
           "papas fritas",
         ],
-        sizes: { simple: "$430", doble: "$510", triples: "$590" },
+        sizes: { simple: 430, doble: 510, triples: 590 },
       },
       {
+        id: 6,
         name: "Bully burger",
         image:
           "https://media-cdn.tripadvisor.com/media/photo-s/0e/40/91/8b/hamburguesa-con-queso.jpg",
@@ -85,38 +91,41 @@ const categories = [
           "bacon barbacoa",
           "papas fritas",
         ],
-        sizes: { simple: "$490", doble: "$580", triples: "$660" },
+        sizes: { simple: 490, doble: 580, triples: 660 },
       },
     ],
   },
-  { name: "ensaladas", items: [] },
+
   {
     name: "Porciones",
     items: [
       {
+        id: 7,
         name: "Papas fritas",
         image: "Images/porcionpapas.jpg",
         ingredients: ["papas", "sal"],
-        sizes: { L: "$170", XL: "$200" },
+        sizes: { L: 170, XL: 200 },
       },
       {
+        id: 8,
         name: "Batatas fritas",
         image:
           "https://static.paraloscuriosos.com/img/articles/4957/800x800/5774ea13e10d9_miniaturka.jpg",
         ingredients: ["batatas", "sal"],
-        sizes: { L: "$220", XL: "$250" },
+        sizes: { L: 220, XL: 250 },
       },
       {
+        id: 9,
         name: "Espiral de papas",
         image:
           "https://www.paulinacocina.net/wp-content/uploads/2016/03/vlcsnap-2016-03-14-13h07m45s251-1-e1457972681209.jpg",
         ingredients: ["papas", "sal"],
         sizes: {
-          unidad: "$80",
-          X2: "$150",
-          X3: "$210",
-          X4: "$260",
-          X5: "$300",
+          unidad: 80,
+          X2: 150,
+          X3: 210,
+          X4: 260,
+          X5: 300,
         },
       },
     ],
@@ -166,7 +175,6 @@ function MainPage() {
   const [open, setOpen] = useState({ openCart: false, openCartItem: false });
   const [detail, setDetail] = useState();
   const [cart, setCart] = useState([]);
-  const [quantity, setQuantity] = useState();
 
   function handleOnClick(item) {
     handleSetOpen("openCartItem");
@@ -178,6 +186,7 @@ function MainPage() {
   }
 
   function handleOnClickCart(orderItem) {
+    orderItem.id = cart.length + 1;
     setCart([...cart, orderItem]);
     handleSetOpen("openCart");
   }
@@ -186,6 +195,24 @@ function MainPage() {
     setOpen((prevState) => {
       return { ...prevState, [dialog]: !prevState[dialog] };
     });
+  }
+  function updateQuantity(quantity, id) {
+    // const newOrderItem = cart.find((item) => item.nameItem === nameItem);
+    // newOrderItem.quantity += quantity;
+
+    const newOrderItems = cart.map((item) => {
+      if (item.id === id) {
+        return { ...item, quantity: item.quantity + parseInt(quantity) };
+      }
+
+      return item;
+    });
+
+    setCart(newOrderItems);
+  }
+  function handleOnDelete(id) {
+    const newItems = cart.filter((cart) => cart.id !== id);
+    setCart(newItems);
   }
 
   return (
@@ -196,7 +223,6 @@ function MainPage() {
         src="https://i.pinimg.com/originals/e2/98/11/e29811d3411c6696130a123c32727d9a.jpg"
       />
       <Typography className={classes.businessName}>
-        {" "}
         Stoke House Burgers
       </Typography>
       <span>
@@ -255,8 +281,6 @@ function MainPage() {
       <div>
         {detail && (
           <CardItem
-            quantity={quantity}
-            setQuantity={setQuantity}
             open={open.openCartItem}
             setOpen={() => handleSetOpen("openCartItem")}
             image={detail.image}
@@ -269,12 +293,12 @@ function MainPage() {
       </div>
       <div className={classes.shoppingCart}>
         {cart && (
-          <ShoppingCart
+          <Cart
             open={open.openCart}
             setOpen={() => handleSetOpen("openCart")}
             cart={cart}
-            quantity={quantity}
-            setQuantity={setQuantity}
+            updateQuantity={updateQuantity}
+            handleOnDelete={handleOnDelete}
           />
         )}
       </div>

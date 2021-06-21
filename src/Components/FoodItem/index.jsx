@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-function FoodItem({ image, itemName, ingredients, price, onClick }) {
+function FoodItem({ image, itemName, ingredients, price, onClick, id }) {
   const classes = useStyles();
 
   return (

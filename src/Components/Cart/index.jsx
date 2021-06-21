@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   titleDialog: { alignSelf: "center", fontSize: "20px", fontWeight: "bolder" },
 });
 
-function Cart({ open, setOpen, cart, quantity, setQuantity }) {
+function Cart({ open, setOpen, cart, updateQuantity, handleOnDelete }) {
   const classes = useStyles();
 
   const handleClose = () => {
@@ -36,8 +36,10 @@ function Cart({ open, setOpen, cart, quantity, setQuantity }) {
       <Typography className={classes.titleDialog}>Tu compra</Typography>
       {cart.map((item) => (
         <OrderItem
-          setQuantity={setQuantity}
+          updateQuantity={updateQuantity}
+          handleOnDelete={handleOnDelete}
           nameItem={item.nameItem}
+          id={item.id}
           image={item.image}
           quantity={item.quantity}
           price={item.selectedSize.price}

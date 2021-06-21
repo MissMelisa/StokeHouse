@@ -99,13 +99,12 @@ function CardItem({
   ingredients,
   nameItem,
   onClickAddItem,
-  quantity,
-  setQuantity,
 }) {
   const classes = useStyles();
 
   const [excludedItems, setExludedItems] = useState([]);
   const [selectedSize, setSelectedSize] = useState({});
+  const [quantity, setQuantity] = useState(1);
 
   const handleClose = () => {
     console.log(open);
@@ -135,11 +134,14 @@ function CardItem({
       image,
       quantity,
     };
+
     onClickAddItem(orderItem);
     setOpen(false);
+    setExludedItems([]);
+    setSelectedSize({});
   }
   function handleOnChangeQuantity(ev) {
-    setQuantity(ev.target.value);
+    setQuantity(parseInt(ev.target.value));
   }
 
   return (
@@ -202,6 +204,7 @@ function CardItem({
               type="number"
               label="Cantidad"
               onChange={handleOnChangeQuantity}
+              defaultValue={1}
             />
           </div>
         </div>

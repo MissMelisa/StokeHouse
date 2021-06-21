@@ -3,7 +3,6 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import { makeStyles } from "@material-ui/core/styles";
-import { useState } from "react";
 
 const useStyles = makeStyles({
   image: { width: "200px", height: "150px" },
@@ -19,18 +18,20 @@ const useStyles = makeStyles({
 
 function OrderItem({
   nameItem,
+  id,
   excludedItems,
   image,
   price,
   subTotal,
   size,
   quantity,
+  updateQuantity,
+  handleOnDelete,
 }) {
   const classes = useStyles();
-  const [updateQuantity, setUpdateQuantity] = useState(quantity);
 
   function handleOnClickAdd(newQuantity) {
-    setUpdateQuantity((prevState) => prevState + parseInt(newQuantity));
+    updateQuantity(newQuantity, id);
   }
 
   return (
@@ -41,7 +42,7 @@ function OrderItem({
         <Typography className={classes.itemData}>{excludedItems}</Typography>
         <Typography className={classes.itemData}>{size}</Typography>
         <Typography>
-          {updateQuantity}X {price}
+          {quantity}X ${price * quantity}
         </Typography>
         <ButtonGroup size="small" aria-label="small outlined button group">
           <Button onClick={() => handleOnClickAdd(1)}>
@@ -50,7 +51,7 @@ function OrderItem({
           <Button onClick={() => handleOnClickAdd(-1)}>
             <RemoveIcon />
           </Button>
-          <Button>
+          <Button onClick={() => handleOnDelete(id)}>
             <DeleteForeverIcon />
           </Button>
         </ButtonGroup>
