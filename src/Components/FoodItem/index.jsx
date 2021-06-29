@@ -26,6 +26,7 @@ const useStyles = makeStyles({
 
 function FoodItem({ image, itemName, ingredients, sizes, onClick, id }) {
   const classes = useStyles();
+  const defaultSize = Object.values(sizes)[0];
 
   return (
     <div className={classes.containerItem}>
@@ -44,7 +45,8 @@ function FoodItem({ image, itemName, ingredients, sizes, onClick, id }) {
           <Typography>{ingredients}</Typography>
         )}
       </Typography>
-      <Typography>${sizes.simple}</Typography>
+
+      <Typography>${defaultSize}</Typography>
     </div>
   );
 }
