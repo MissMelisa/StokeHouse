@@ -10,10 +10,8 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { makeStyles } from "@material-ui/core/styles";
 import Cart from "../../Components/Cart";
 import { useCart } from "../../Components/context/cartContext";
-
+import InstagramIcon from "@material-ui/icons/Instagram";
 import categories from "../../menu.json";
-
-// const MENU = JSON.parse(categories);
 
 const useStyles = makeStyles({
   dishes: {
@@ -143,6 +141,8 @@ function MainPage() {
           <span>8 P.M. - 12 P.M.</span>
           <PhoneAndroidIcon />
           <span> 11 7360-7946</span>
+          <InstagramIcon />
+          <span>@stokehouse.burger</span>
         </span>
       </div>
 

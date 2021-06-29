@@ -98,7 +98,7 @@ function Cart({ open, setOpen, handleOnDelete, subTotal }) {
           className={classes.button}
           onClick={handleOnClickFinishedBuying}
         >
-          Terminar comprar
+          Finalizar tu pedido
         </Button>
         <Button
           color="primary"
