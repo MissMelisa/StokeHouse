@@ -119,7 +119,7 @@ function CheckOutPage() {
     const intro = "Hola,me gustaria realizar una orden 🛵🔜🏡 : \n";
     const orderWhatsApp = cart.map(
       (item) =>
-        `🔘${item.quantity} ${item.nameItem} ${
+        `U+1F518${item.quantity} ${item.nameItem} ${
           item.selectedSize.size
         } sin ${item.excludedItems.join()}`
     );

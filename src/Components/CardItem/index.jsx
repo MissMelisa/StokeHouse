@@ -201,7 +201,7 @@ function CardItem({
                 aria-label="large outlined primary button group"
               >
                 {Object.entries(sizes).map((size) => {
-                  const [key, value] = size;
+                  const [key] = size;
                   return (
                     <Button
                       onClick={() => handleOnClickSelected(size)}
