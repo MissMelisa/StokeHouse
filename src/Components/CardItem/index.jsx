@@ -22,6 +22,7 @@ const useStyles = makeStyles({
   containerImage: {
     justifyContent: "center",
     display: "flex",
+    flexDirection: "column",
   },
   image: {
     margin: "20px",
@@ -47,11 +48,10 @@ const useStyles = makeStyles({
     margin: "20px",
   },
   spanIngredients: {
-    color: "#525f7f",
     justifyContent: "space-between",
     display: "flex",
-    flexDirection: "column",
-    marginBottom: "10px",
+    alignItems: "center",
+    margin: "10px",
   },
   data: {
     display: "grid",
@@ -76,7 +76,7 @@ const useStyles = makeStyles({
     alignSelf: "flex-start",
     fontSize: "15px",
     fontWeight: "bolder",
-    marginBottom: "6px",
+    margin: "6px",
   },
   button: {
     display: "flex",
@@ -96,6 +96,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     flexDirection: "column",
   },
+  errorMessage: { color: "red" },
 });
 
 function CardItem({
@@ -112,6 +113,7 @@ function CardItem({
   const [excludedItems, setExludedItems] = useState([]);
   const [selectedSize, setSelectedSize] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const [error, setError] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
@@ -129,6 +131,8 @@ function CardItem({
 
   function handleOnClickSelected(selected) {
     const [size, price] = selected;
+    setError(false);
+
     setSelectedSize({ size, price });
   }
 
@@ -140,6 +144,10 @@ function CardItem({
       image,
       quantity,
     };
+    if (!selectedSize.size) {
+      setError(true);
+      return;
+    }
 
     onClickAddItem(orderItem);
     setOpen(false);
@@ -164,13 +172,14 @@ function CardItem({
       <div className={classes.modalData}>
         <div className={classes.title}>
           <Typography className={classes.nameItem}>{nameItem}</Typography>
-          <span className={classes.spanTitle}>Ingredientes </span>
-          <span className={classes.spanIngredients}>
-            {!!ingredients ? ingredients.join() : ""}
-          </span>
         </div>
         <div className={classes.data}>
           <span className={classes.containerImage}>
+            <span className={classes.spanTitle}>Ingredientes </span>
+            <span className={classes.spanIngredients}>
+              {!!ingredients ? ingredients.join() : ""}
+            </span>
+
             <img src={image} alt={nameItem} className={classes.image} />
           </span>
 
@@ -201,17 +210,23 @@ function CardItem({
                 aria-label="large outlined primary button group"
               >
                 {Object.entries(sizes).map((size) => {
-                  const [key] = size;
+                  const [key, price] = size;
+
                   return (
                     <Button
                       onClick={() => handleOnClickSelected(size)}
                       color={key === selectedSize.size && "primary"}
                     >
-                      {key}
+                      {key} $ {price}
                     </Button>
                   );
                 })}
               </ButtonGroup>
+              {error === true && (
+                <span className={classes.errorMessage}>
+                  Selecciona el tamaño
+                </span>
+              )}
             </div>
 
             <TextField

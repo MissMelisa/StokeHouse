@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-function FoodItem({ image, itemName, ingredients, price, onClick, id }) {
+function FoodItem({ image, itemName, ingredients, sizes, onClick, id }) {
   const classes = useStyles();
 
   return (
@@ -44,7 +44,7 @@ function FoodItem({ image, itemName, ingredients, price, onClick, id }) {
           <Typography>{ingredients}</Typography>
         )}
       </Typography>
-      <Typography>{price}</Typography>
+      <Typography>${sizes.simple}</Typography>
     </div>
   );
 }
