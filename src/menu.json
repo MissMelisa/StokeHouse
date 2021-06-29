@@ -96,14 +96,18 @@
         "id": 2,
         "name": "Combo cervezero",
         "image": "Images/cheeseburger.jpeg",
-        "ingredients": ["Cheese burger doble,papas fritas y cerveza Brahma"],
+        "ingredients": [
+          "Cheese burger doble",
+          "Papas fritas",
+          "Cerveza Brahma"
+        ],
         "sizes": { "simple": 680 }
       },
       {
         "id": 3,
         "name": "Combo gaseosa",
         "image": "Images/burgerdoble.jpg",
-        "ingredients": ["Cheese burger doble,papas fritas y Pepsi/SevenUp"],
+        "ingredients": ["Cheese burger doble", "Papas fritas", "Pepsi/SevenUp"],
         "sizes": { "simple": 680 }
       }
     ]
