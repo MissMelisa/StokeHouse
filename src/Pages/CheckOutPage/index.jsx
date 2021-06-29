@@ -8,7 +8,7 @@ import OrderItem from "../../Components/OrderItem";
 const useStyles = makeStyles({
   checkoutPageContainer: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+
     gap: "40px",
     marginTop: "40px",
     alignItems: "center",
@@ -224,7 +224,7 @@ function CheckOutPage() {
             variant="h5"
             className={classes.typography}
           >
-            Finalizar pedido
+            Finalizar tu pedido
           </Typography>
 
           <span className={classes.total}>
