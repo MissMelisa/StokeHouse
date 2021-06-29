@@ -1,7 +1,11 @@
 import { Button, Drawer, Typography } from "@material-ui/core";
 import OrderItem from "../OrderItem";
-
+import ClearIcon from "@material-ui/icons/Clear";
 import { makeStyles } from "@material-ui/core/styles";
+
+import { useCart } from "../context/cartContext";
+
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   drawer: {
@@ -13,7 +17,7 @@ const useStyles = makeStyles({
   },
   paperAnchorRight: { width: "100%", maxWidth: "400px" },
 
-  button: { margin: "20px", cursor: "pointer" },
+  button: { marginBottom: "15px" },
   total: {
     border: "1px solid #d2d6dc ",
     minHeight: "60px",
@@ -23,26 +27,37 @@ const useStyles = makeStyles({
     margin: "16px",
     justifyContent: "center",
   },
+  cartButton: {
+    display: "flex",
+    alignSelf: "flex-end",
+    justifyContent: "center",
+    margin: "16px",
+    cursor: "pointer",
+  },
+  buttonsDrawer: {
+    display: "flex",
+    flexDirection: "column",
+    alignSelf: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+  },
   titleDialog: { alignSelf: "center", fontSize: "20px", fontWeight: "bolder" },
 });
 
-function Cart({
-  open,
-  setOpen,
-  cart,
-  updateQuantity,
-  handleOnDelete,
-  subTotal,
-}) {
+function Cart({ open, setOpen, handleOnDelete, subTotal }) {
   const classes = useStyles();
+  const { cart, updateItemQuantity } = useCart();
+
+  let history = useHistory();
 
   const handleClose = () => {
     setOpen(true);
   };
 
-  function handleOnClickFinishedBuying() {}
+  function handleOnClickFinishedBuying() {
+    return history.push("/checkout");
+  }
 
-  console.log(cart);
   return (
     <Drawer
       anchor="right"
@@ -53,10 +68,12 @@ function Cart({
       open={open}
       maxWidth="lg"
     >
+      <ClearIcon className={classes.cartButton} onClick={handleClose} />
+
       <Typography className={classes.titleDialog}>Tu compra</Typography>
       {cart.map((item) => (
         <OrderItem
-          updateQuantity={updateQuantity}
+          updateQuantity={updateItemQuantity}
           handleOnDelete={handleOnDelete}
           nameItem={item.nameItem}
           id={item.id}
@@ -74,14 +91,24 @@ function Cart({
           return subTotal;
         }, 0)}
       </Typography>
-      <Button
-        color="primary"
-        variant="contained"
-        className={classes.button}
-        onClick={handleOnClickFinishedBuying}
-      >
-        Terminar comprar
-      </Button>
+      <div className={classes.buttonsDrawer}>
+        <Button
+          color="primary"
+          variant="contained"
+          className={classes.button}
+          onClick={handleOnClickFinishedBuying}
+        >
+          Terminar comprar
+        </Button>
+        <Button
+          color="primary"
+          variant="contained"
+          className={classes.button}
+          onClick={handleClose}
+        >
+          Seguir comprando
+        </Button>
+      </div>
     </Drawer>
   );
 }

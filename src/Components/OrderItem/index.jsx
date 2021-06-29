@@ -8,7 +8,6 @@ const useStyles = makeStyles({
   image: { width: "200px", height: "150px" },
   itemData: {
     fontSize: "15px",
-
     color: "#32325d",
     fontWeight: "bolder",
   },
@@ -17,7 +16,8 @@ const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "center",
     maxWidth: "400px",
-    maxHeight: "1000px",
+    maxHeight: "500px",
+    margin: "10px",
   },
   buttonGroup: {
     margin: "10px",
