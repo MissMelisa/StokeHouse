@@ -136,7 +136,7 @@ function CheckOutPage() {
 
     const dataClient = `📍  *Datos del cliente* \n Mi nombre es: ${order.name}\n Direccion: A${order.address}\n🧾Abonare con: $ ${order.cash}\n🗒Comentario: ${order.comments}`;
     const finalMessage = encodeURIComponent(`${intro}${dataClient}`);
-    window.location.href = `https://web.whatsapp.com/send?phone=+5491123879820&text=${finalMessage}`;
+    window.location.href = `https://wa.me/5491173607946?text=${finalMessage}`;
   }
 
   return (
