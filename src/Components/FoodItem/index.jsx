@@ -5,10 +5,9 @@ const useStyles = makeStyles({
   containerItem: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
+    alignItems: "center",
+    justifyContent: "center",
     width: "100%",
-    margin: "30px",
   },
   itemName: {
     fontSize: "25px",
@@ -16,7 +15,7 @@ const useStyles = makeStyles({
   },
   ingredients: {
     color: "grey",
-    alignSelf: "flex-start",
+    alignSelf: "center",
   },
   image: {
     width: "250px",
@@ -24,8 +23,9 @@ const useStyles = makeStyles({
   },
 });
 
-function FoodItem({ image, itemName, ingredients, price, onClick }) {
+function FoodItem({ image, itemName, ingredients, sizes, onClick, id }) {
   const classes = useStyles();
+  const defaultSize = Object.values(sizes)[0];
 
   return (
     <div className={classes.containerItem}>
@@ -44,7 +44,8 @@ function FoodItem({ image, itemName, ingredients, price, onClick }) {
           <Typography>{ingredients}</Typography>
         )}
       </Typography>
-      <Typography>{price}</Typography>
+
+      <Typography>${defaultSize}</Typography>
     </div>
   );
 }
