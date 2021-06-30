@@ -16,7 +16,12 @@ const useStyles = makeStyles({
     maxWidth: "400px",
     overflow: "scroll",
   },
-  paperAnchorRight: { width: "100%", maxWidth: "400px", alignItems: "center" },
+  paperAnchorRight: {
+    width: "100%",
+    maxWidth: "400px",
+    alignItems: "center",
+    overflow: "scroll",
+  },
 
   button: { marginBottom: "15px" },
   total: {
@@ -30,7 +35,7 @@ const useStyles = makeStyles({
   },
   cartButton: {
     display: "flex",
-    alignSelf: "flex-end",
+    alignSelf: "flex-start",
     justifyContent: "center",
     margin: "16px",
     cursor: "pointer",
@@ -54,6 +59,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     margin: "20px",
   },
+  containerOrderItem: { overflow: "scroll" },
 });
 
 function Cart({ open, setOpen, handleOnDelete, subTotal }) {
@@ -84,7 +90,7 @@ function Cart({ open, setOpen, handleOnDelete, subTotal }) {
 
       <Typography className={classes.titleDialog}>Tu compra</Typography>
       {cart.length >= 1 ? (
-        <>
+        <div className={classes.containerOrderItem}>
           {cart.map((item) => (
             <OrderItem
               updateQuantity={updateItemQuantity}
@@ -115,22 +121,30 @@ function Cart({ open, setOpen, handleOnDelete, subTotal }) {
             >
               Finalizar tu pedido
             </Button>
+            <Button
+              color="primary"
+              variant="contained"
+              className={classes.button}
+              onClick={handleClose}
+            >
+              Seguir comprando
+            </Button>
           </div>
-        </>
+        </div>
       ) : (
         <div className={classes.emptyContainer}>
           <SentimentVeryDissatisfiedIcon color="primary" fontSize="large" />
           <Typography variant="h5">Tu carrito esta vacio</Typography>
+          <Button
+            color="primary"
+            variant="contained"
+            className={classes.button}
+            onClick={handleClose}
+          >
+            Seguir comprando
+          </Button>
         </div>
       )}
-      <Button
-        color="primary"
-        variant="contained"
-        className={classes.button}
-        onClick={handleClose}
-      >
-        Seguir comprando
-      </Button>
     </Drawer>
   );
 }
