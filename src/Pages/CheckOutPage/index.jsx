@@ -115,17 +115,20 @@ function CheckOutPage() {
   function handleOnSubmit(event) {
     event.preventDefault();
 
-    const intro = "Hola,me gustaria realizar una orden 🛵🔜🏡 : \n";
-    const orderWhatsApp = cart.map(
-      (item) =>
-        `${item.quantity} ${item.nameItem} ${
-          item.selectedSize.size
-        } sin ${item.excludedItems.join()}`
-    );
+    let intro = "Hola,me gustaria realizar una orden 🛵🔜🏡 : \n ";
+
+    cart.forEach((item) => {
+      intro += `${item.quantity} ${item.nameItem} ${item.selectedSize.size} `;
+
+      // intro -> hola, me gustaria realizar una orden + 4 cheeseburger XL, 2 big mac M
+
+      if (item.excludedItems.length >= 1)
+        // hola, me gustaria realizar una orden 4 cheeseburger XL, 2 big mac M + sin pepino
+        intro += ` sin ${item.excludedItems.join()}`;
+    });
+
     const dataClient = `📍  *Datos del cliente* \n Mi nombre es: ${order.name}\n Direccion: A${order.address}\n🧾Abonare con: $ ${order.cash}\n🗒Comentario: ${order.comments}`;
-    const finalMessage = encodeURIComponent(
-      `${intro}${orderWhatsApp}${dataClient}`
-    );
+    const finalMessage = encodeURIComponent(`${intro}${dataClient}`);
     window.location.href = `https://web.whatsapp.com/send?phone=+5491123879820&text=${finalMessage}`;
   }
 

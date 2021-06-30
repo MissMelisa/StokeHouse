@@ -2,7 +2,7 @@ import { Button, Drawer, Typography } from "@material-ui/core";
 import OrderItem from "../OrderItem";
 import ClearIcon from "@material-ui/icons/Clear";
 import { makeStyles } from "@material-ui/core/styles";
-
+import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 import { useCart } from "../context/cartContext";
 
 import { useHistory } from "react-router-dom";
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     maxWidth: "400px",
     overflow: "scroll",
   },
-  paperAnchorRight: { width: "100%", maxWidth: "400px" },
+  paperAnchorRight: { width: "100%", maxWidth: "400px", alignItems: "center" },
 
   button: { marginBottom: "15px" },
   total: {
@@ -43,6 +43,17 @@ const useStyles = makeStyles({
     cursor: "pointer",
   },
   titleDialog: { alignSelf: "center", fontSize: "20px", fontWeight: "bolder" },
+  emptyContainer: {
+    border: "1px solid black",
+    maxWidth: "300px",
+    width: "100%",
+    maxHeight: "250px",
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex",
+    flexDirection: "column",
+    margin: "20px",
+  },
 });
 
 function Cart({ open, setOpen, handleOnDelete, subTotal }) {
@@ -72,44 +83,54 @@ function Cart({ open, setOpen, handleOnDelete, subTotal }) {
       <ClearIcon className={classes.cartButton} onClick={handleClose} />
 
       <Typography className={classes.titleDialog}>Tu compra</Typography>
-      {cart.map((item) => (
-        <OrderItem
-          updateQuantity={updateItemQuantity}
-          handleOnDelete={handleOnDelete}
-          nameItem={item.nameItem}
-          id={item.id}
-          image={item.image}
-          quantity={item.quantity}
-          price={item.selectedSize.price}
-          size={item.selectedSize.size}
-          excludedItems={item.excludedItems}
-        />
-      ))}
-      <Typography className={classes.total}>
-        Total: $
-        {cart.reduce((subTotal, cartItem) => {
-          subTotal = subTotal + cartItem.quantity * cartItem.selectedSize.price;
-          return subTotal;
-        }, 0)}
-      </Typography>
-      <div className={classes.buttonsDrawer}>
-        <Button
-          color="primary"
-          variant="contained"
-          className={classes.button}
-          onClick={handleOnClickFinishedBuying}
-        >
-          Finalizar tu pedido
-        </Button>
-        <Button
-          color="primary"
-          variant="contained"
-          className={classes.button}
-          onClick={handleClose}
-        >
-          Seguir comprando
-        </Button>
-      </div>
+      {cart.length >= 1 ? (
+        <>
+          {cart.map((item) => (
+            <OrderItem
+              updateQuantity={updateItemQuantity}
+              handleOnDelete={handleOnDelete}
+              nameItem={item.nameItem}
+              id={item.id}
+              image={item.image}
+              quantity={item.quantity}
+              price={item.selectedSize.price}
+              size={item.selectedSize.size}
+              excludedItems={item.excludedItems}
+            />
+          ))}
+          <Typography className={classes.total}>
+            Total: $
+            {cart.reduce((subTotal, cartItem) => {
+              subTotal =
+                subTotal + cartItem.quantity * cartItem.selectedSize.price;
+              return subTotal;
+            }, 0)}
+          </Typography>
+          <div className={classes.buttonsDrawer}>
+            <Button
+              color="primary"
+              variant="contained"
+              className={classes.button}
+              onClick={handleOnClickFinishedBuying}
+            >
+              Finalizar tu pedido
+            </Button>
+          </div>
+        </>
+      ) : (
+        <div className={classes.emptyContainer}>
+          <SentimentVeryDissatisfiedIcon color="primary" fontSize="large" />
+          <Typography variant="h5">Tu carrito esta vacio</Typography>
+        </div>
+      )}
+      <Button
+        color="primary"
+        variant="contained"
+        className={classes.button}
+        onClick={handleClose}
+      >
+        Seguir comprando
+      </Button>
     </Drawer>
   );
 }
