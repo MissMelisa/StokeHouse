@@ -119,16 +119,15 @@ function CheckOutPage() {
     const intro = "Hola,me gustaria realizar una orden 🛵🔜🏡 : \n";
     const orderWhatsApp = cart.map(
       (item) =>
-        `U+1F518${item.quantity} ${item.nameItem} ${
+        `${item.quantity} ${item.nameItem} ${
           item.selectedSize.size
         } sin ${item.excludedItems.join()}`
     );
-    const dataClient = `📍 *Datos del cliente* \n Mi nombre es: ${order.name}\n Direccion: A${order.address}\n🧾Abonare con: $ ${order.cash}\n🗒Comentario: ${order.comments}`;
+    const dataClient = `📍  *Datos del cliente* \n Mi nombre es: ${order.name}\n Direccion: A${order.address}\n🧾Abonare con: $ ${order.cash}\n🗒Comentario: ${order.comments}`;
     const finalMessage = encodeURIComponent(
       `${intro}${orderWhatsApp}${dataClient}`
     );
-    window.location.href = `https://wa.me/5491123940805?text=${finalMessage}
-    }`;
+    window.location.href = `https://web.whatsapp.com/send?phone=+5491123879820&text=${finalMessage}`;
   }
 
   return (

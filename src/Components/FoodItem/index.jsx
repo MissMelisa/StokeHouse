@@ -8,7 +8,6 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    margin: "30px",
   },
   itemName: {
     fontSize: "25px",

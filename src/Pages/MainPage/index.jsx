@@ -3,6 +3,7 @@ import { useState } from "react";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import PhoneAndroidIcon from "@material-ui/icons/PhoneAndroid";
 import Button from "@material-ui/core/Button";
+import Badge from "@material-ui/core/Badge";
 import CardItem from "../../Components/CardItem";
 import { Typography } from "@material-ui/core";
 import FoodItem from "../../Components/FoodItem";
@@ -13,7 +14,7 @@ import { useCart } from "../../Components/context/cartContext";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import categories from "../../menu.json";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   dishes: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill,minmax(300px, 1fr))",
@@ -27,10 +28,8 @@ const useStyles = makeStyles({
     width: "100%",
   },
   page: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
+    display: "grid",
+    placeItems: "center",
     position: "relative",
   },
   categoryTitle: {
@@ -44,14 +43,14 @@ const useStyles = makeStyles({
     margin: "8px",
   },
   cartButton: {
+    [theme.breakpoints.down("sm")]: { display: "none" },
     color: "#5e72e4",
-    display: "flex",
-    alignSelf: "flex-end",
-    margin: "16px",
-    boxShadow: "5px grey",
+    position: "absolute",
+    right: "24px",
+    top: "24px",
   },
   restaurantName: { color: "#525f7f" },
-  logo: { width: "320px", height: "300px" },
+  logo: { width: "360px", height: "300px", alignSelf: "center" },
   containerCategory: { width: "100%" },
   header: {
     display: "flex",
@@ -91,10 +90,16 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
   },
-});
+  spanIcons: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    paddingBottom: "10px",
+  },
+}));
 
 function MainPage() {
-  const { cart, addNewItem, deleteItem } = useCart();
+  const { cart, addNewItem, deleteItem, totalCartItem } = useCart();
 
   const [open, setOpen] = useState({ openCart: false, openCartItem: false });
   const classes = useStyles();
@@ -120,32 +125,43 @@ function MainPage() {
       return { ...prevState, [dialog]: !prevState[dialog] };
     });
   }
-
+  function handleOnReDirectInstagram() {
+    window.location.href = "https://www.instagram.com/stokehouse.burger/";
+  }
   return (
     <div className={classes.page}>
-      <Button
-        variant="outline"
-        startIcon={<ShoppingCartIcon />}
-        className={classes.cartButton}
-        onClick={() => handleSetOpen("openCart")}
-      >
-        Mi orden
-      </Button>
       <div className={classes.header}>
+        <Button
+          variant="outline"
+          startIcon={<ShoppingCartIcon />}
+          className={classes.cartButton}
+          onClick={() => handleSetOpen("openCart")}
+        >
+          Mi orden
+        </Button>
+
         <img className={classes.logo} alt="logo" src="Images/logo.jpg" />
-        <Typography className={classes.businessName}>
+        <Typography className={classes.businessName} variant="h2">
           Stoke House Burgers
         </Typography>
-        <span>
-          <QueryBuilderIcon />
-          <span>8 P.M. - 12 P.M.</span>
-          <PhoneAndroidIcon />
-          <span> 11 7360-7946</span>
-          <InstagramIcon />
-          <span>@stokehouse.burger</span>
-        </span>
+        <div className={classes.icons}>
+          <span className={classes.spanIcons}>
+            <QueryBuilderIcon />
+            <Typography variant="h7">8 P.M. - 12 P.M.</Typography>
+          </span>
+          <span className={classes.spanIcons}>
+            <PhoneAndroidIcon />
+            <Typography variant="h7">11 7360-7946</Typography>
+          </span>
+          <span
+            className={classes.spanIcons}
+            onClick={handleOnReDirectInstagram}
+          >
+            <InstagramIcon />
+            <Typography variant="h7">@stokehouse.burger</Typography>
+          </span>
+        </div>
       </div>
-
       <div className={classes.mainButton}>
         <Button
           variant={filter ? "outlined" : "contained"}
@@ -168,10 +184,17 @@ function MainPage() {
           ))}
         </div>
       </div>
-      <ShoppingCartIcon
-        onClick={() => handleSetOpen("openCart")}
+      <Badge
+        badgeContent={totalCartItem}
+        anchorOrigin={{ horizontal: "left", vertical: "top" }}
+        color="secondary"
         className={classes.cart}
-      />
+      >
+        <ShoppingCartIcon
+          onClick={() => handleSetOpen("openCart")}
+          className={classes.cart}
+        />
+      </Badge>
       <div className={classes.containerCategory}>
         {categories
           .filter((category) => !filter || (filter && category.name === filter))

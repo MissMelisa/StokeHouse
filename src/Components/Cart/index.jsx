@@ -86,8 +86,8 @@ function Cart({ open, setOpen, handleOnDelete, subTotal }) {
       ))}
       <Typography className={classes.total}>
         Total: $
-        {cart.reduce((subTotal, cart) => {
-          subTotal = subTotal + cart.quantity * cart.selectedSize.price;
+        {cart.reduce((subTotal, cartItem) => {
+          subTotal = subTotal + cartItem.quantity * cartItem.selectedSize.price;
           return subTotal;
         }, 0)}
       </Typography>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { useState } from "react";
 
@@ -14,7 +15,13 @@ export function useCart() {
 } //hook useContext
 
 function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("myCart")) || []
+  );
+
+  useEffect(() => {
+    localStorage.setItem("myCart", JSON.stringify(cart));
+  }, [cart]);
 
   function addNewItem(orderItem) {
     orderItem.id = cart.length + 1;
@@ -36,10 +43,21 @@ function CartProvider({ children }) {
     const newItems = cart.filter((cart) => cart.id !== id);
     setCart(newItems);
   }
+  const totalCartItem = cart.reduce(
+    (total, cartItem) => (total = total + cartItem.quantity),
+    0
+  );
 
   return (
     <CartContext.Provider
-      value={{ cart, setCart, addNewItem, updateItemQuantity, deleteItem }}
+      value={{
+        cart,
+        totalCartItem,
+        setCart,
+        addNewItem,
+        updateItemQuantity,
+        deleteItem,
+      }}
     >
       {children}
     </CartContext.Provider>

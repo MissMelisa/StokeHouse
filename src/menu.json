@@ -5,7 +5,7 @@
       {
         "id": 1,
         "name": "Cheeseburger",
-        "image": "Images/cheeseburger.jpeg",
+        "image": "Images/burgerdoble.jpg",
         "ingredients": ["pan", "carne 125gr", "papas fritas"],
         "sizes": { "simple": 390, "Doble": 470, "Triples": 550 }
       },

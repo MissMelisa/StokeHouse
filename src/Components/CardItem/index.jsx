@@ -28,6 +28,7 @@ const useStyles = makeStyles({
     margin: "20px",
     width: "250px",
     height: "300px",
+    alignSelf: "center",
   },
   modalData: {
     backgroundColor: "white",
@@ -209,6 +210,7 @@ function CardItem({
                 color="default"
                 aria-label="large outlined primary button group"
               >
+                {}
                 {Object.entries(sizes).map((size) => {
                   const [key, price] = size;
 

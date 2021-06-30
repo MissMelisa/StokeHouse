@@ -1,9 +1,10 @@
+import { Typography } from "@material-ui/core";
 import React from "react";
 
 export default function Footer() {
   return (
     <footer>
-      <p>&copy; StokeHouse 2020</p>
+      <Typography variant="h8">&copy; StokeHouse 2021</Typography>
     </footer>
   );
 }
