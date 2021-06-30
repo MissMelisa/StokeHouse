@@ -14,10 +14,7 @@ const useStyles = makeStyles({
     width: "100%",
     height: "100%",
     maxWidth: "400px",
-<<<<<<< HEAD
     overflow: "scroll",
-=======
->>>>>>> 451028ae17abd2a10e4575527644271dc448bde6
   },
   paperAnchorRight: { width: "100%", maxWidth: "400px" },
 
