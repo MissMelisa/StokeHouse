@@ -3,126 +3,18 @@ import { useState } from "react";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import PhoneAndroidIcon from "@material-ui/icons/PhoneAndroid";
 import Button from "@material-ui/core/Button";
+import Badge from "@material-ui/core/Badge";
 import CardItem from "../../Components/CardItem";
 import { Typography } from "@material-ui/core";
 import FoodItem from "../../Components/FoodItem";
-
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { makeStyles } from "@material-ui/core/styles";
+import Cart from "../../Components/Cart";
+import { useCart } from "../../Components/context/cartContext";
+import InstagramIcon from "@material-ui/icons/Instagram";
+import categories from "../../menu.json";
 
-const categories = [
-  {
-    name: "Burgers",
-    items: [
-      {
-        name: "Cheeseburger",
-        image: "Images/cheeseburger.jpeg",
-        ingredients: ["pan", "carne 125gr", "papas fritas"],
-        sizes: { simple: "$390", Doble: "$470", Triples: "$550" },
-      },
-      {
-        name: "Classic",
-        image: "Images/classic.jpeg",
-        ingredients: [
-          "pan",
-          "carne 125gr",
-          "creddar",
-          "tomate",
-          "lechuga",
-          "cebolla",
-          "papas fritas",
-        ],
-        sizes: { simple: "$410", Doble: "$490" },
-      },
-      {
-        name: "Sweetmeat",
-        image: "Images/sweetmeat.jpg",
-        ingredients: [
-          "pan",
-          "carne 125gr",
-          "cebolla caramelizada",
-          "cheddar",
-          "papas fritas",
-        ],
-        sizes: { simple: "$400", doble: "$480", triples: "$560" },
-      },
-      {
-        name: "Veggie",
-        image: "https://www.hazteveg.com/img/recipes/full/201204/R21-31659.jpg",
-        ingredients: [
-          "pan",
-          "medallon de lenteja",
-          "tomate",
-          "lechuga",
-          "papas fritas",
-        ],
-        sizes: { simple: "$400", doble: "$480" },
-      },
-      {
-        name: "Grilled onion",
-        image:
-          "https://grandwichacasa.com.ar/wp-content/uploads/2020/05/burguer-con-cheddar.jpg",
-        ingredients: [
-          "pan",
-          "carne 125gr",
-          "cheddar",
-          "bacon",
-          "cebolla grillada",
-          "papas fritas",
-        ],
-        sizes: { simple: "$430", doble: "$510", triples: "$590" },
-      },
-      {
-        name: "Bully burger",
-        image:
-          "https://media-cdn.tripadvisor.com/media/photo-s/0e/40/91/8b/hamburguesa-con-queso.jpg",
-        ingredients: [
-          "pan",
-          "carne 125gr",
-          "cheddar",
-          "huevo",
-          "cebolla caramelizada",
-          "bacon barbacoa",
-          "papas fritas",
-        ],
-        sizes: { simple: "$490", doble: "$580", triples: "$660" },
-      },
-    ],
-  },
-  { name: "ensaladas", items: [] },
-  {
-    name: "Porciones",
-    items: [
-      {
-        name: "Papas fritas",
-        image: "Images/porcionpapas.jpg",
-        ingredients: ["papas", "sal"],
-        sizes: { L: "$170", XL: "$200" },
-      },
-      {
-        name: "Batatas fritas",
-        image:
-          "https://static.paraloscuriosos.com/img/articles/4957/800x800/5774ea13e10d9_miniaturka.jpg",
-        ingredients: ["batatas", "sal"],
-        sizes: { L: "$220", XL: "$250" },
-      },
-      {
-        name: "Espiral de papas",
-        image:
-          "https://www.paulinacocina.net/wp-content/uploads/2016/03/vlcsnap-2016-03-14-13h07m45s251-1-e1457972681209.jpg",
-        ingredients: ["papas", "sal"],
-        sizes: {
-          unidad: "$80",
-          X2: "$150",
-          X3: "$210",
-          X4: "$260",
-          X5: "$300",
-        },
-      },
-    ],
-  },
-];
-
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   dishes: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill,minmax(300px, 1fr))",
@@ -136,15 +28,13 @@ const useStyles = makeStyles({
     width: "100%",
   },
   page: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
+    display: "grid",
+    placeItems: "center",
+    position: "relative",
   },
   categoryTitle: {
     alignSelf: "flex-start",
     marginLeft: "30px",
-
     color: "#32325d",
     fontWeight: "bolder",
     fontSize: "30px",
@@ -152,20 +42,72 @@ const useStyles = makeStyles({
   button: {
     margin: "8px",
   },
+  cartButton: {
+    [theme.breakpoints.down("sm")]: { display: "none" },
+    color: "#5e72e4",
+    position: "absolute",
+    right: "24px",
+    top: "24px",
+  },
   restaurantName: { color: "#525f7f" },
-  logo: { width: "400px", height: "300px" },
+  logo: { width: "360px", height: "300px", alignSelf: "center" },
   containerCategory: { width: "100%" },
-});
+  header: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  businessName: {
+    fontWeight: "bolder",
+    fontSize: "30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cart: {
+    bottom: "24px",
+    right: "24px",
+    boxShadow: "5px grey",
+    position: "fixed",
+    background: "#f5365c",
+    borderRadius: "50%",
+    height: "30px",
+    width: "30px",
+    color: "white",
+    padding: "12px",
+    marginRight: "10px",
+    cursor: "pointer",
+  },
+  buttonsContainer: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr ",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  mainButton: {
+    display: "grid",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  spanIcons: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    paddingBottom: "10px",
+  },
+}));
 
 function MainPage() {
+  const { cart, addNewItem, deleteItem, totalCartItem } = useCart();
+
+  const [open, setOpen] = useState({ openCart: false, openCartItem: false });
   const classes = useStyles();
   const [filter, setFilter] = useState();
-  const [open, setOpen] = useState(false);
   const [detail, setDetail] = useState();
 
   function handleOnClick(item) {
-    console.log(item);
-    setOpen(true);
+    handleSetOpen("openCartItem");
     setDetail(item);
   }
 
@@ -173,21 +115,54 @@ function MainPage() {
     setFilter(value);
   }
 
+  function handleOnClickCart(orderItem) {
+    addNewItem(orderItem);
+    handleSetOpen("openCart");
+  }
+
+  function handleSetOpen(dialog) {
+    setOpen((prevState) => {
+      return { ...prevState, [dialog]: !prevState[dialog] };
+    });
+  }
+  function handleOnReDirectInstagram() {
+    window.location.href = "https://www.instagram.com/stokehouse.burger/";
+  }
   return (
     <div className={classes.page}>
-      <img
-        className={classes.logo}
-        alt="logo"
-        src="https://i.pinimg.com/originals/e2/98/11/e29811d3411c6696130a123c32727d9a.jpg"
-      />
-      <Typography> Stoke House Burgers</Typography>
-      <span>
-        <QueryBuilderIcon />
-        <span>8 P.M. - 12 P.M.</span>
-        <PhoneAndroidIcon />
-        <span> 11 7360-7946</span>
-      </span>
-      <div>
+      <div className={classes.header}>
+        <Button
+          variant="outline"
+          startIcon={<ShoppingCartIcon />}
+          className={classes.cartButton}
+          onClick={() => handleSetOpen("openCart")}
+        >
+          Mi orden
+        </Button>
+
+        <img className={classes.logo} alt="logo" src="Images/logo.jpg" />
+        <Typography className={classes.businessName} variant="h2">
+          Stoke House Burgers
+        </Typography>
+        <div className={classes.icons}>
+          <span className={classes.spanIcons}>
+            <QueryBuilderIcon />
+            <Typography variant="h7">8 P.M. - 12 P.M.</Typography>
+          </span>
+          <span className={classes.spanIcons}>
+            <PhoneAndroidIcon />
+            <Typography variant="h7">11 7360-7946</Typography>
+          </span>
+          <span
+            className={classes.spanIcons}
+            onClick={handleOnReDirectInstagram}
+          >
+            <InstagramIcon />
+            <Typography variant="h7">@stokehouse.burger</Typography>
+          </span>
+        </div>
+      </div>
+      <div className={classes.mainButton}>
         <Button
           variant={filter ? "outlined" : "contained"}
           className={classes.button}
@@ -196,7 +171,7 @@ function MainPage() {
         >
           Todas las categorias
         </Button>
-        <div>
+        <div className={classes.buttonsContainer}>
           {categories.map((category) => (
             <Button
               variant={filter === category.name ? "contained" : "outlined"}
@@ -209,7 +184,17 @@ function MainPage() {
           ))}
         </div>
       </div>
-
+      <Badge
+        badgeContent={totalCartItem}
+        anchorOrigin={{ horizontal: "left", vertical: "top" }}
+        color="secondary"
+        className={classes.cart}
+      >
+        <ShoppingCartIcon
+          onClick={() => handleSetOpen("openCart")}
+          className={classes.cart}
+        />
+      </Badge>
       <div className={classes.containerCategory}>
         {categories
           .filter((category) => !filter || (filter && category.name === filter))
@@ -237,16 +222,23 @@ function MainPage() {
       <div>
         {detail && (
           <CardItem
-            open={open}
-            setOpen={setOpen}
+            open={open.openCartItem}
+            setOpen={() => handleSetOpen("openCartItem")}
             image={detail.image}
             nameItem={detail.name}
             ingredients={detail.ingredients}
             sizes={detail.sizes}
-            onClickAddItem={alert}
+            onClickAddItem={handleOnClickCart}
           />
         )}
       </div>
+      {cart && (
+        <Cart
+          open={open.openCart}
+          setOpen={() => handleSetOpen("openCart")}
+          handleOnDelete={deleteItem}
+        />
+      )}
     </div>
   );
 }

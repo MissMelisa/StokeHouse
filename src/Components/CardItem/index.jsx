@@ -6,33 +6,37 @@ import {
   Checkbox,
   Dialog,
   FormControlLabel,
+  TextField,
   Typography,
 } from "@material-ui/core";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useMediaQuery } from "@material-ui/core";
 
 const useStyles = makeStyles({
   modal: {
-    width: "100%",
-    height: "100%",
     border: "0 solid #d2d6dc",
     backgroundColor: "white",
-    display: "flex",
-    alignItems: "center",
+    padding: "20px",
+  },
+  containerImage: {
     justifyContent: "center",
+    display: "flex",
     flexDirection: "column",
   },
   image: {
     margin: "20px",
     width: "250px",
     height: "300px",
-    alignSelf: "flex-start",
+    alignSelf: "center",
   },
   modalData: {
     backgroundColor: "white",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    maxHeight: "700px",
+    height: "100%",
   },
   nameItem: {
     fontSize: "25px",
@@ -45,33 +49,55 @@ const useStyles = makeStyles({
     margin: "20px",
   },
   spanIngredients: {
-    color: "#525f7f",
     justifyContent: "space-between",
     display: "flex",
-    flexDirection: "column",
+    alignItems: "center",
+    margin: "10px",
   },
   data: {
-    display: "flex",
-    borderTop: "1px solid #d2d6dc",
+    display: "grid",
     backgroundColor: "#f4f5f7 !important",
+    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+    width: "100%",
   },
-  span: { padding: "30px", display: "flex", flexDirection: "column" },
+  span: {
+    padding: "30px",
+  },
   checkbox: {
     display: "flex",
     alignItems: "center",
   },
   size: {
     display: "flex",
-    alignItems: "center",
     flexDirection: "column",
+    justifyContent: "flex-start",
+    marginBottom: "20px",
   },
   spanTitle: {
     alignSelf: "flex-start",
     fontSize: "15px",
     fontWeight: "bolder",
-    marginBottom: "6px",
+    margin: "6px",
   },
-  title: { display: "flex", alignItems: "center", flexDirection: "column" },
+  button: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
+    margin: "20px",
+  },
+  title: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    padding: "10px",
+  },
+  inputNumber: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  errorMessage: { color: "red" },
 });
 
 function CardItem({
@@ -86,7 +112,9 @@ function CardItem({
   const classes = useStyles();
 
   const [excludedItems, setExludedItems] = useState([]);
-  const [selected, setSelected] = useState();
+  const [selectedSize, setSelectedSize] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [error, setError] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
@@ -103,34 +131,61 @@ function CardItem({
   };
 
   function handleOnClickSelected(selected) {
-    setSelected(selected);
+    const [size, price] = selected;
+    setError(false);
+
+    setSelectedSize({ size, price });
   }
 
   function handleOnClickAdd() {
-    const orderItem = { nameItem, selected, excludedItems };
+    const orderItem = {
+      nameItem,
+      selectedSize,
+      excludedItems,
+      image,
+      quantity,
+    };
+    if (!selectedSize.size) {
+      setError(true);
+      return;
+    }
+
     onClickAddItem(orderItem);
+    setOpen(false);
+    setExludedItems([]);
+    setSelectedSize({});
   }
-  console.log(ingredients, "lll");
+  const theme = useTheme();
+
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+  function handleOnChangeQuantity(ev) {
+    setQuantity(parseInt(ev.target.value));
+  }
 
   return (
     <Dialog
       open={open}
       onClose={handleClose}
       className={classes.modal}
-      maxWidth="lg"
+      fullScreen={fullScreen}
     >
       <div className={classes.modalData}>
         <div className={classes.title}>
           <Typography className={classes.nameItem}>{nameItem}</Typography>
-          <span className={classes.spanTitle}>Ingredientes </span>
-          <span className={classes.spanIngredients}>
-            {!!ingredients ? ingredients.join() : ""}
-          </span>
         </div>
         <div className={classes.data}>
-          <img src={image} alt={nameItem} className={classes.image} />
+          <span className={classes.containerImage}>
+            <span className={classes.spanTitle}>Ingredientes </span>
+            <span className={classes.spanIngredients}>
+              {!!ingredients ? ingredients.join() : ""}
+            </span>
+
+            <img src={image} alt={nameItem} className={classes.image} />
+          </span>
+
           <div className={classes.span}>
-            <div className={classes.extras}>
+            <div className={classes.data}>
               <span className={classes.spanTitle}>Excluir</span>
               {ingredients.map((ingredient) => (
                 <div className={classes.checkbox}>
@@ -146,32 +201,53 @@ function CardItem({
                   />
                 </div>
               ))}
-              <div className={classes.size}>
-                <span className={classes.spanTitle}>Tamaño</span>
-                <ButtonGroup
-                  size="large"
-                  color="primary"
-                  aria-label="large outlined primary button group"
-                >
-                  {Object.keys(sizes).map((size) => (
+            </div>
+
+            <div className={classes.size}>
+              <span className={classes.spanTitle}>Tamaño</span>
+              <ButtonGroup
+                size="large"
+                color="default"
+                aria-label="large outlined primary button group"
+              >
+                {}
+                {Object.entries(sizes).map((size) => {
+                  const [key, price] = size;
+
+                  return (
                     <Button
                       onClick={() => handleOnClickSelected(size)}
-                      color={size === selected && "secondary"}
+                      color={key === selectedSize.size && "primary"}
                     >
-                      {size}
+                      {key} $ {price}
                     </Button>
-                  ))}
-                </ButtonGroup>
-              </div>
+                  );
+                })}
+              </ButtonGroup>
+              {error === true && (
+                <span className={classes.errorMessage}>
+                  Selecciona el tamaño
+                </span>
+              )}
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div>
-        <Button variant="contained" color="primary" onClick={handleOnClickAdd}>
-          Agregar
-        </Button>
+            <TextField
+              type="number"
+              label="Cantidad"
+              onChange={handleOnChangeQuantity}
+              defaultValue={1}
+            />
+          </div>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            onClick={handleOnClickAdd}
+            size="medium"
+          >
+            Agregar
+          </Button>
+        </div>
       </div>
     </Dialog>
   );
