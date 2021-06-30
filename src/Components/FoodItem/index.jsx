@@ -8,10 +8,14 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
+    cursor: "pointer",
+    marginBottom: "15px",
   },
   itemName: {
     fontSize: "25px",
     fontWeight: "bolder",
+    marginRight: "10px",
+    alignSelf: "flex-start",
   },
   ingredients: {
     color: "grey",
@@ -20,6 +24,11 @@ const useStyles = makeStyles({
   image: {
     width: "250px",
     height: "200px",
+  },
+  itemData: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
   },
 });
 
@@ -35,8 +44,11 @@ function FoodItem({ image, itemName, ingredients, sizes, onClick, id }) {
         className={classes.image}
         onClick={onClick}
       />
+      <div className={classes.itemData}>
+        <Typography className={classes.itemName}>{itemName}</Typography>
+        <Typography>${defaultSize}</Typography>
+      </div>
 
-      <Typography className={classes.itemName}>{itemName}</Typography>
       <Typography className={classes.ingredients}>
         {ingredients.length >= 30 ? (
           <Typography> {ingredients.substring(0, 30)}... </Typography>
@@ -44,8 +56,6 @@ function FoodItem({ image, itemName, ingredients, sizes, onClick, id }) {
           <Typography>{ingredients}</Typography>
         )}
       </Typography>
-
-      <Typography>${defaultSize}</Typography>
     </div>
   );
 }

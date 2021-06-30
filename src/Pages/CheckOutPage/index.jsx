@@ -92,6 +92,13 @@ const useStyles = makeStyles({
     fontSize: "20px",
     fontWeight: "bolder",
   },
+  businessName: {
+    fontWeight: "bolder",
+    fontSize: "30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
 
 function CheckOutPage() {
@@ -136,7 +143,12 @@ function CheckOutPage() {
     <div>
       <div className={classes.containerLogo}>
         <img className={classes.logo} alt="logo" src="Images/logo.jpg" />
-        <Typography color="black" variant="h3" align="center">
+        <Typography
+          color="black"
+          variant="h2"
+          className={classes.businessName}
+          align="center"
+        >
           Stoke House Burgers
         </Typography>
       </div>

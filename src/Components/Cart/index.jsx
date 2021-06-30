@@ -14,13 +14,11 @@ const useStyles = makeStyles({
     width: "100%",
     height: "100%",
     maxWidth: "400px",
-    overflow: "scroll",
   },
   paperAnchorRight: {
     width: "100%",
     maxWidth: "400px",
     alignItems: "center",
-    overflow: "scroll",
   },
 
   button: { marginBottom: "15px" },

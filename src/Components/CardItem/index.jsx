@@ -207,7 +207,8 @@ function CardItem({
               <span className={classes.spanTitle}>Tamaño</span>
               <ButtonGroup
                 size="large"
-                color="default"
+                variant="contained"
+                color="primary"
                 aria-label="large outlined primary button group"
               >
                 {}
@@ -217,7 +218,10 @@ function CardItem({
                   return (
                     <Button
                       onClick={() => handleOnClickSelected(size)}
-                      color={key === selectedSize.size && "primary"}
+                      color="primary"
+                      variant={
+                        key === selectedSize.size ? "contained" : "outline"
+                      }
                     >
                       {key} $ {price}
                     </Button>

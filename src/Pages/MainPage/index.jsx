@@ -34,10 +34,11 @@ const useStyles = makeStyles((theme) => ({
   },
   categoryTitle: {
     alignSelf: "flex-start",
-    marginLeft: "30px",
     color: "#32325d",
     fontWeight: "bolder",
     fontSize: "30px",
+    marginBottom: "15px",
+    marginLeft: "10px",
   },
   button: {
     margin: "8px",
