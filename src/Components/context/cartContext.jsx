@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { useState } from "react";
 
+import PropTypes from "prop-types";
+
 export const CartContext = React.createContext();
 
 export function useCart() {
@@ -63,5 +65,9 @@ function CartProvider({ children }) {
     </CartContext.Provider>
   );
 }
+
+CartProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default CartProvider;

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 import {
   Button,
@@ -256,5 +257,15 @@ function CardItem({
     </Dialog>
   );
 }
+
+CardItem.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
+  image: PropTypes.string,
+  sizes: PropTypes.number,
+  ingredients: PropTypes.string,
+  nameItem: PropTypes.string.isRequired,
+  onClickAddItem: PropTypes.func.isRequired,
+};
 
 export default CardItem;

@@ -3,9 +3,11 @@ import OrderItem from "../OrderItem";
 import ClearIcon from "@material-ui/icons/Clear";
 import { makeStyles } from "@material-ui/core/styles";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
+
 import { useCart } from "../context/cartContext";
 
 import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
   drawer: {
@@ -60,7 +62,7 @@ const useStyles = makeStyles({
   containerOrderItem: { overflow: "scroll" },
 });
 
-function Cart({ open, setOpen, handleOnDelete, subTotal }) {
+function Cart({ open, setOpen, handleOnDelete }) {
   const classes = useStyles();
   const { cart, updateItemQuantity } = useCart();
 
@@ -146,4 +148,10 @@ function Cart({ open, setOpen, handleOnDelete, subTotal }) {
     </Drawer>
   );
 }
+
+Cart.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
+  handleOnDelete: PropTypes.func.isRequired,
+};
 export default Cart;

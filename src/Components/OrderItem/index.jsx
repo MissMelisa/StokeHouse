@@ -4,6 +4,8 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import { makeStyles } from "@material-ui/core/styles";
 
+import PropTypes from "prop-types";
+
 const useStyles = makeStyles({
   image: { width: "200px", height: "150px" },
   itemData: {
@@ -30,7 +32,6 @@ function OrderItem({
   excludedItems,
   image,
   price,
-
   size,
   quantity,
   updateQuantity,
@@ -71,4 +72,16 @@ function OrderItem({
     </>
   );
 }
+
+OrderItem.propTypes = {
+  nameItem: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  excludedItems: PropTypes.string,
+  image: PropTypes.string,
+  price: PropTypes.number.isRequired,
+  size: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired,
+  updateQuantity: PropTypes.number,
+  handleOnDelete: PropTypes.func.isRequired,
+};
 export default OrderItem;

@@ -1,6 +1,8 @@
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+import PropTypes from "prop-types";
+
 const useStyles = makeStyles({
   containerItem: {
     display: "flex",
@@ -32,7 +34,7 @@ const useStyles = makeStyles({
   },
 });
 
-function FoodItem({ image, itemName, ingredients, sizes, onClick, id }) {
+function FoodItem({ image, itemName, ingredients, sizes, onClick }) {
   const classes = useStyles();
   const defaultSize = Object.values(sizes)[0];
 
@@ -59,5 +61,13 @@ function FoodItem({ image, itemName, ingredients, sizes, onClick, id }) {
     </div>
   );
 }
+
+FoodItem.propTypes = {
+  image: PropTypes.string,
+  itemName: PropTypes.string.isRequired,
+  ingredients: PropTypes.string,
+  sizes: PropTypes.number,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default FoodItem;
