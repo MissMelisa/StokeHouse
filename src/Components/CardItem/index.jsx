@@ -205,12 +205,13 @@ function CardItem({
             </div>
 
             <div className={classes.size}>
-              <span className={classes.spanTitle}>Tamaño</span>
+              <span className={classes.spanTitle}>Opciones</span>
               <ButtonGroup
                 size="large"
-                variant="contained"
+                variant="text"
+                orientation="vertical"
                 color="primary"
-                aria-label="large outlined primary button group"
+                aria-label="vertical outlined primary button group"
               >
                 {}
                 {Object.entries(sizes).map((size) => {

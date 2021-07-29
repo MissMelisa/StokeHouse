@@ -7,7 +7,7 @@
         "name": "Cheeseburger",
         "image": "Images/burgerdoble.jpg",
         "ingredients": ["pan", "carne 125gr", "papas fritas"],
-        "sizes": { "simple": 390, "Doble": 470, "Triples": 550 }
+        "sizes": { "simple": 460, "Doble": 540, "Triples": 620 }
       },
       {
         "id": 2,
@@ -22,7 +22,7 @@
           "cebolla",
           "papas fritas"
         ],
-        "sizes": { "simple": 410, "Doble": 490 }
+        "sizes": { "simple": 480, "Doble": 560 }
       },
       {
         "id": 3,
@@ -35,7 +35,7 @@
           "cheddar",
           "papas fritas"
         ],
-        "sizes": { "simple": 400, "doble": 480, "triples": 560 }
+        "sizes": { "simple": 470, "doble": 550, "triples": 630 }
       },
       {
         "id": 4,
@@ -48,7 +48,7 @@
           "lechuga",
           "papas fritas"
         ],
-        "sizes": { "simple": 400, "doble": 480 }
+        "sizes": { "simple": 430, "doble": 510 }
       },
       {
         "id": 5,
@@ -62,7 +62,7 @@
           "cebolla grillada",
           "papas fritas"
         ],
-        "sizes": { "simple": 430, "doble": 510, "triples": 590 }
+        "sizes": { "simple": 500, "doble": 580, "triples": 660 }
       },
       {
         "id": 6,
@@ -77,13 +77,46 @@
           "bacon barbacoa",
           "papas fritas"
         ],
-        "sizes": { "simple": 490, "doble": 580, "triples": 660 }
+        "sizes": { "simple": 560, "doble": 650, "triples": 730 }
       }
     ]
   },
 
   {
     "name": "Combos",
+    "items": [
+      {
+        "id": 1,
+        "name": "Combo 1",
+        "image": "Images/burgerdoble.jpg",
+        "ingredients": ["Dos Cheese burger doble", "papas fritas "],
+        "sizes": { "Doble": 1040 }
+      },
+      {
+        "id": 2,
+        "name": "Combo 2",
+        "image": "Images/cheeseburger.jpeg",
+        "ingredients": ["Dos Burgers Classic ", "Papas fritas"],
+        "sizes": { "simple": 920 }
+      },
+      {
+        "id": 3,
+        "name": "Combo 3",
+        "image": "Images/burgerdoble.jpg",
+        "ingredients": ["Cuatro Cheese burger simple", "Papas fritas"],
+        "sizes": { "simple": 1760 }
+      },
+      {
+        "id": 4,
+        "name": "Combo 4",
+        "image": "Images/sweetmeat.jpg",
+        "ingredients": ["Dos Sweetmeat", "Papas fritas"],
+        "sizes": { "simple": 900 }
+      }
+    ]
+  },
+  {
+    "name": "Combos con bebida",
     "items": [
       {
         "id": 1,
@@ -108,7 +141,25 @@
         "name": "Combo gaseosa",
         "image": "Images/burgerdoble.jpg",
         "ingredients": ["Cheese burger doble", "Papas fritas", "Pepsi/SevenUp"],
-        "sizes": { "simple": 680 }
+        "sizes": { "simple": 620 }
+      }
+    ]
+  },
+
+  {
+    "name": "Para acompañar",
+    "items": [
+      {
+        "id": 1,
+        "name": "Dips",
+        "image": "https://www.riotchicken.com/wp-content/uploads/2019/03/bbq-dip-e1563224376953.jpg",
+        "ingredients": [],
+        "sizes": {
+          " Mayonesa": 50,
+          " Cebolla carmelizada": 50,
+          " BBQ": 50,
+          " Cheddar": 60
+        }
       }
     ]
   },
@@ -129,18 +180,22 @@
         "image": "https://static.paraloscuriosos.com/img/articles/4957/800x800/5774ea13e10d9_miniaturka.jpg",
         "ingredients": ["batatas", "sal"],
         "sizes": { "L": 220, "XL": 250 }
-      },
+      }
+    ]
+  },
+  {
+    "name": "Extras",
+    "items": [
       {
-        "id": 9,
-        "name": "Espiral de papas",
-        "image": "https://www.paulinacocina.net/wp-content/uploads/2016/03/vlcsnap-2016-03-14-13h07m45s251-1-e1457972681209.jpg",
-        "ingredients": ["papas", "sal"],
+        "id": 1,
+        "name": "Dip",
+        "image": "Images/burgerdoble.jpg",
+        "ingredients": [],
         "sizes": {
-          "unidad": 80,
-          "X2": 150,
-          "X3": 210,
-          "X4": 260,
-          "X5": 300
+          "Extra Carne": 100,
+          "Extra medallon de lenteja": 70,
+          "Extra cheddar": 60,
+          "Extra Bacon": 60
         }
       }
     ]
@@ -157,10 +212,62 @@
       },
       {
         "id": 2,
+        "name": "Gaseosa 500cc",
+        "image": "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/273/434/products/77918134201181-02c1892ab7b2181d5e15952575329430-1024-1024.jpg",
+        "ingredients": [],
+        "sizes": { "Pepsi": 100, "Coca-Cola": 130 }
+      },
+      {
+        "id": 2,
         "name": "Cervezas de 473ml",
         "image": "https://ardiaprod.vteximg.com.br/arquivos/ids/192228-1000-1000/Cerveza-Andes-Rubia-en-lata-473-Ml-_1.jpg?v=637509637124830000",
         "ingredients": [],
         "sizes": { "Brahama": 150, "AndesRubia": 170 }
+      }
+    ]
+  },
+
+  {
+    "name": "Promo Bebidas",
+    "items": [
+      {
+        "name": " 7up 354cc x2",
+        "ingredients": [],
+        "image": "https://superlago.com.ar/wp-content/uploads/2021/04/7791813777021.jpg",
+        "sizes": { "7up ": 140 }
+      },
+      {
+        "name": " Pepsi 500cc x2",
+        "ingredients": [],
+        "image": "https://depotexpress.com.ar/tienda/wp-content/uploads/2020/06/Gaseosa-Pepsi-Lata-X-354.jpg",
+        "sizes": { "Pepsi ": 220 }
+      },
+      {
+        "name": " CocaCola 500cc x2",
+        "ingredients": [],
+        "image": "https://www.casa-segal.com/wp-content/uploads/2020/03/coca-cola-500cc-almacen-gaseosas-casa-segal-mendoza.jpg",
+        "sizes": { "CocaCola ": 250 }
+      },
+      {
+        "name": " Cerveza Brahama 473cc x3",
+        "ingredients": [],
+        "image": "http://cdn.shopify.com/s/files/1/0254/2947/5433/products/cerveza-brahma-chopp-354-siempreencasa_1000x.png?v=1623696189",
+        "sizes": { "Brahama ": 410 }
+      }
+    ]
+  },
+  {
+    "name": "Postres",
+    "items": [
+      {
+        "name": " Chocotorta",
+        "image": "http://www.cookiesundays.org/wp-content/uploads/2015/09/chocotorta.jpeg",
+        "sizes": { "Chocotorta ": 260 }
+      },
+      {
+        "name": " Bomba Oreo",
+        "image": "https://img-global.cpcdn.com/recipes/0f32deac7b31e8f1/1200x630cq70/photo.jpg",
+        "sizes": { "Bomba Oreo ": 250 }
       }
     ]
   }
