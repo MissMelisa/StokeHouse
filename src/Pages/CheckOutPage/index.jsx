@@ -125,7 +125,7 @@ function CheckOutPage() {
     let intro = "Hola,me gustaria realizar una orden 🛵🔜🏡 : \n ";
 
     cart.forEach((item) => {
-      intro += `${item.quantity} ${item.nameItem} ${item.selectedSize.size} `;
+      intro += `${item.quantity} ${item.nameItem} ${item.selectedSize.size} /n`;
 
       // intro -> hola, me gustaria realizar una orden + 4 cheeseburger XL, 2 big mac M
 
