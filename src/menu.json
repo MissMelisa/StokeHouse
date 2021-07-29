@@ -261,11 +261,13 @@
     "items": [
       {
         "name": " Chocotorta",
+        "ingredients": [],
         "image": "http://www.cookiesundays.org/wp-content/uploads/2015/09/chocotorta.jpeg",
         "sizes": { "Chocotorta ": 260 }
       },
       {
         "name": " Bomba Oreo",
+        "ingredients": [],
         "image": "https://img-global.cpcdn.com/recipes/0f32deac7b31e8f1/1200x630cq70/photo.jpg",
         "sizes": { "Bomba Oreo ": 250 }
       }
