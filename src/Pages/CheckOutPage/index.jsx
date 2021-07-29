@@ -125,13 +125,13 @@ function CheckOutPage() {
     let intro = "Hola,me gustaria realizar una orden 🛵🔜🏡 :  ";
 
     cart.forEach((item) => {
-      intro += `${item.quantity} ${item.nameItem} ${item.selectedSize.size} /n`;
+      intro += `${item.quantity} ${item.nameItem} ${item.selectedSize.size} \n`;
 
       // intro -> hola, me gustaria realizar una orden + 4 cheeseburger XL, 2 big mac M
 
       if (item.excludedItems.length >= 1)
         // hola, me gustaria realizar una orden 4 cheeseburger XL, 2 big mac M + sin pepino
-        intro += ` sin ${item.excludedItems.join()}`;
+        intro += ` sin ${item.excludedItems.join()} \n`;
     });
 
     const dataClient = `📍  *Datos del cliente* \n Mi nombre es: ${order.name}\n Direccion: ${order.address}\n🧾Abonare con: $ ${order.cash}\n🗒Comentario: ${order.comments}`;
