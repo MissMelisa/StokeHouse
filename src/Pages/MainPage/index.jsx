@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
   button: {
     margin: "8px",
     minWidth: "100px",
-    width: "100%",
   },
   cartButton: {
     [theme.breakpoints.down("sm")]: { display: "none" },
