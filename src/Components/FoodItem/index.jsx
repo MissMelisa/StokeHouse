@@ -29,6 +29,7 @@ const useStyles = makeStyles({
   },
   itemData: {
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-around",
   },

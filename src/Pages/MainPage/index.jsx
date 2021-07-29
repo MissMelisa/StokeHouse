@@ -42,6 +42,8 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: "8px",
+    minWidth: "100px",
+    width: "100%",
   },
   cartButton: {
     [theme.breakpoints.down("sm")]: { display: "none" },
@@ -80,16 +82,21 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "10px",
     cursor: "pointer",
   },
-  buttonsContainer: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr ",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+
   mainButton: {
+    [theme.breakpoints.down("sm")]: {
+      display: "flex",
+      overflow: "scroll",
+      alignItems: "center",
+      width: "100%",
+    },
     display: "grid",
+    width: "100%",
+    gridTemplateColumns: "repeat(auto-fit,minmax(230px, 1fr))",
+    padding: "0",
+    margin: "0",
+    listStyle: "none",
     alignItems: "center",
-    justifyContent: "center",
   },
   spanIcons: {
     display: "flex",
@@ -172,19 +179,19 @@ function MainPage() {
         >
           Todas las categorias
         </Button>
-        <div className={classes.buttonsContainer}>
-          {categories.map((category) => (
-            <Button
-              variant={filter === category.name ? "contained" : "outlined"}
-              className={classes.button}
-              color="primary"
-              onClick={() => handleOnClickFilter(category.name)}
-            >
-              {category.name}
-            </Button>
-          ))}
-        </div>
+
+        {categories.map((category) => (
+          <Button
+            variant={filter === category.name ? "contained" : "outlined"}
+            className={classes.button}
+            color="primary"
+            onClick={() => handleOnClickFilter(category.name)}
+          >
+            {category.name}
+          </Button>
+        ))}
       </div>
+
       <Badge
         badgeContent={totalCartItem}
         anchorOrigin={{ horizontal: "left", vertical: "top" }}
