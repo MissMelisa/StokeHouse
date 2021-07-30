@@ -4,7 +4,7 @@ import React from "react";
 export default function Footer() {
   return (
     <footer>
-      <Typography variant="h8">&copy; StokeHouse 2021</Typography>
+      <Typography variant="h6">&copy; StokeHouse 2021</Typography>
     </footer>
   );
 }

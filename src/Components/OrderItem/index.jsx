@@ -76,12 +76,12 @@ function OrderItem({
 OrderItem.propTypes = {
   nameItem: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  excludedItems: PropTypes.string,
+  excludedItems: PropTypes.array,
   image: PropTypes.string,
   price: PropTypes.number.isRequired,
-  size: PropTypes.number.isRequired,
+  size: PropTypes.any.isRequired,
   quantity: PropTypes.number.isRequired,
-  updateQuantity: PropTypes.number,
+  updateQuantity: PropTypes.func,
   handleOnDelete: PropTypes.func.isRequired,
 };
 export default OrderItem;

@@ -111,6 +111,7 @@ function CardItem({
   nameItem,
   onClickAddItem,
   options,
+  id,
 }) {
   const classes = useStyles();
 
@@ -152,7 +153,7 @@ function CardItem({
       excludedItems,
       image,
       quantity,
-      options,
+      selectedOptions,
     };
 
     if (!selectedSize.size) {

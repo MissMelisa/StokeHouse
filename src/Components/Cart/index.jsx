@@ -93,6 +93,7 @@ function Cart({ open, setOpen, handleOnDelete }) {
         <div className={classes.containerOrderItem}>
           {cart.map((item) => (
             <OrderItem
+              key={item.id}
               updateQuantity={updateItemQuantity}
               handleOnDelete={handleOnDelete}
               nameItem={item.nameItem}

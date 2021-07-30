@@ -13,6 +13,14 @@ const useStyles = makeStyles({
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
+    width: "100%",
+  },
+  buttonFoodItem: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
   },
 });
 
@@ -25,7 +33,7 @@ export default function FoodItemOptions({
 }) {
   const classes = useStyles();
   return (
-    <div>
+    <div className={classes.buttonFoodItem}>
       <Typography className={classes.spanTitle}>{title}</Typography>
       <ButtonGroup
         size="large"
@@ -37,6 +45,7 @@ export default function FoodItemOptions({
       >
         {options.map((option) => (
           <Button
+            className={classes.buttonFoodItem}
             onClick={() => onClick(title, option)}
             color="primary"
             variant={option === selectedOption ? "contained" : "outline"}

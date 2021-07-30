@@ -154,18 +154,18 @@ function MainPage() {
         <div className={classes.icons}>
           <span className={classes.spanIcons}>
             <QueryBuilderIcon />
-            <Typography variant="h7">8 P.M. - 12 P.M.</Typography>
+            <Typography variant="h6">8 P.M. - 12 P.M.</Typography>
           </span>
           <span className={classes.spanIcons}>
             <PhoneAndroidIcon />
-            <Typography variant="h7">11 7360-7946</Typography>
+            <Typography variant="h6">11 7360-7946</Typography>
           </span>
           <span
             className={classes.spanIcons}
             onClick={handleOnReDirectInstagram}
           >
             <InstagramIcon />
-            <Typography variant="h7">@stokehouse.burger</Typography>
+            <Typography variant="h6">@stokehouse.burger</Typography>
           </span>
         </div>
       </div>
@@ -181,6 +181,7 @@ function MainPage() {
 
         {categories.map((category) => (
           <Button
+            key={category.name}
             variant={filter === category.name ? "contained" : "outlined"}
             className={classes.button}
             color="primary"
@@ -206,13 +207,14 @@ function MainPage() {
         {categories
           .filter((category) => !filter || (filter && category.name === filter))
           .map((category) => (
-            <div className={classes.category}>
+            <div className={classes.category} key={category.name}>
               <Typography className={classes.categoryTitle}>
                 {category.name}
               </Typography>
               <div className={classes.dishes}>
                 {category.items.map((item) => (
                   <FoodItem
+                    key={item.id}
                     onClick={() => handleOnClick(item)}
                     image={item.image}
                     itemName={item.name}
@@ -229,6 +231,7 @@ function MainPage() {
       <div>
         {detail && (
           <CardItem
+            key={detail.id}
             open={open.openCartItem}
             options={detail.options}
             setOpen={() => handleSetOpen("openCartItem")}

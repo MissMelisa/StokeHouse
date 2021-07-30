@@ -67,7 +67,7 @@ FoodItem.propTypes = {
   image: PropTypes.string,
   itemName: PropTypes.string.isRequired,
   ingredients: PropTypes.string,
-  sizes: PropTypes.number,
+  sizes: PropTypes.any,
   onClick: PropTypes.func.isRequired,
 };
 

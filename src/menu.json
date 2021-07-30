@@ -87,7 +87,7 @@
     "name": "Combos",
     "items": [
       {
-        "id": 1,
+        "id": 7,
         "name": "Combo 1",
         "image": "Images/burgerdoble.jpg",
         "ingredients": ["Dos Cheese burger doble", "papas fritas "],
@@ -98,7 +98,7 @@
         }
       },
       {
-        "id": 2,
+        "id": 8,
         "name": "Combo 2",
         "image": "Images/cheeseburger.jpeg",
         "ingredients": ["Dos Burgers Classic "],
@@ -109,7 +109,7 @@
         }
       },
       {
-        "id": 3,
+        "id": 9,
         "name": "Combo 3",
         "image": "Images/burgerdoble.jpg",
         "ingredients": ["Cuatro Cheese burger simple"],
@@ -120,7 +120,7 @@
         }
       },
       {
-        "id": 4,
+        "id": 10,
         "name": "Combo 4",
         "image": "Images/sweetmeat.jpg",
         "ingredients": ["Dos Sweetmeat"],
@@ -136,7 +136,7 @@
     "name": "Combos con bebida",
     "items": [
       {
-        "id": 1,
+        "id": 11,
         "name": "Combo infantil",
         "image": "Images/burgerdoble.jpg",
         "ingredients": ["Cheese burger y Pepsi/SevenUp"],
@@ -147,7 +147,7 @@
         }
       },
       {
-        "id": 2,
+        "id": 12,
         "name": "Combo cervezero",
         "image": "Images/cheeseburger.jpeg",
         "ingredients": ["Cheese burger doble", "Cerveza Brahma"],
@@ -158,7 +158,7 @@
         }
       },
       {
-        "id": 3,
+        "id": 13,
         "name": "Combo gaseosa",
         "image": "Images/burgerdoble.jpg",
         "ingredients": ["Cheese burger doble", "Pepsi/SevenUp"],
@@ -175,7 +175,7 @@
     "name": "Para acompañar",
     "items": [
       {
-        "id": 1,
+        "id": 14,
         "name": "Dips",
         "image": "https://www.riotchicken.com/wp-content/uploads/2019/03/bbq-dip-e1563224376953.jpg",
         "ingredients": [],
@@ -193,14 +193,14 @@
     "name": "Porciones",
     "items": [
       {
-        "id": 7,
+        "id": 15,
         "name": "Papas fritas",
         "image": "Images/papas.jpg",
         "ingredients": ["papas", "sal"],
         "sizes": { "L": 170, "XL": 200 }
       },
       {
-        "id": 8,
+        "id": 16,
         "name": "Batatas fritas",
         "image": "https://static.paraloscuriosos.com/img/articles/4957/800x800/5774ea13e10d9_miniaturka.jpg",
         "ingredients": ["batatas", "sal"],
@@ -212,7 +212,7 @@
     "name": "Extras",
     "items": [
       {
-        "id": 1,
+        "id": 17,
         "name": "Sumale a tu burger",
         "image": "Images/burgerdoble.jpg",
         "ingredients": [],
@@ -229,21 +229,21 @@
     "name": "Bebidas",
     "items": [
       {
-        "id": 1,
+        "id": 18,
         "name": "Gaseosas en lata",
         "image": "https://s.yimg.com/ny/api/res/1.2/cnQF8W9cEwdlPILoWf_Qdw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTY0MC4zMg--/https://s.yimg.com/uu/api/res/1.2/DMZGGNNL6liGq8wpEQ0oGg--~B/aD02Njc7dz0xMDAwO2FwcGlkPXl0YWNoeW9u/http://media.zenfs.com/en/homerun/feed_manager_auto_publish_494/ccb2ab3e5f933640cc0162c78a898a84",
         "ingredients": [],
         "sizes": { "Pepsi": 80, "SevenUp": 80, "CocaCola": 100 }
       },
       {
-        "id": 2,
+        "id": 19,
         "name": "Gaseosa 500cc",
         "image": "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/273/434/products/77918134201181-02c1892ab7b2181d5e15952575329430-1024-1024.jpg",
         "ingredients": [],
         "sizes": { "Pepsi": 100, "Coca-Cola": 130 }
       },
       {
-        "id": 2,
+        "id": 20,
         "name": "Cervezas de 473ml",
         "image": "https://ardiaprod.vteximg.com.br/arquivos/ids/192228-1000-1000/Cerveza-Andes-Rubia-en-lata-473-Ml-_1.jpg?v=637509637124830000",
         "ingredients": [],
@@ -256,24 +256,28 @@
     "name": "Promo Bebidas",
     "items": [
       {
+        "id": 21,
         "name": " 7up 354cc x2",
         "ingredients": [],
         "image": "https://superlago.com.ar/wp-content/uploads/2021/04/7791813777021.jpg",
         "sizes": { "7up ": 140 }
       },
       {
+        "id": 22,
         "name": " Pepsi 500cc x2",
         "ingredients": [],
         "image": "https://depotexpress.com.ar/tienda/wp-content/uploads/2020/06/Gaseosa-Pepsi-Lata-X-354.jpg",
         "sizes": { "Pepsi ": 220 }
       },
       {
+        "id": 23,
         "name": " CocaCola 500cc x2",
         "ingredients": [],
         "image": "https://www.casa-segal.com/wp-content/uploads/2020/03/coca-cola-500cc-almacen-gaseosas-casa-segal-mendoza.jpg",
         "sizes": { "CocaCola ": 250 }
       },
       {
+        "id": 24,
         "name": " Cerveza Brahama 473cc x3",
         "ingredients": [],
         "image": "http://cdn.shopify.com/s/files/1/0254/2947/5433/products/cerveza-brahma-chopp-354-siempreencasa_1000x.png?v=1623696189",
@@ -285,6 +289,7 @@
     "name": "Postres",
     "items": [
       {
+        "id": 25,
         "name": " Postres",
         "ingredients": [],
         "image": "http://www.cookiesundays.org/wp-content/uploads/2015/09/chocotorta.jpeg",
