@@ -108,8 +108,12 @@ function CheckOutPage() {
     address: "",
     cash: "",
     comments: "",
+    total: "",
   });
-
+  const total = cart.reduce((subTotal, cartItem) => {
+    subTotal = subTotal + cartItem.quantity * cartItem.selectedSize.price;
+    return subTotal;
+  }, 0);
   const classes = useStyles();
 
   function handleOnChangeOrder(ev) {
@@ -118,6 +122,7 @@ function CheckOutPage() {
       [ev.target.name]: ev.target.value,
     }));
   }
+  console.log(cart);
 
   function handleOnSubmit(event) {
     event.preventDefault();
@@ -125,7 +130,9 @@ function CheckOutPage() {
     let intro = "Hola,me gustaria realizar una orden 🛵🔜🏡 :  ";
 
     cart.forEach((item) => {
-      intro += `${item.quantity} ${item.nameItem} ${item.selectedSize.size} \n`;
+      intro += `${item.quantity} ${item.nameItem} ${
+        item.selectedSize.size
+      } ${Object.values(item.options)}\n`;
 
       // intro -> hola, me gustaria realizar una orden + 4 cheeseburger XL, 2 big mac M
 
@@ -133,9 +140,11 @@ function CheckOutPage() {
         // hola, me gustaria realizar una orden 4 cheeseburger XL, 2 big mac M + sin pepino
         intro += ` sin ${item.excludedItems.join()} \n`;
     });
-
-    const dataClient = `📍  *Datos del cliente* \n Mi nombre es: ${order.name}\n Direccion: ${order.address}\n🧾Abonare con: $ ${order.cash}\n🗒Comentario: ${order.comments}`;
-    const finalMessage = encodeURIComponent(`${intro}${dataClient}`);
+    const itemsTotal = total;
+    const dataClient = `📍  *Datos del cliente* \n Mi nombre es: ${order.name}\n Direccion: ${order.address}\n🧾Abonare con: $ ${order.cash}\n🗒Comentario: ${order.comments} \n Total: $ `;
+    const finalMessage = encodeURIComponent(
+      `${intro}${dataClient}${itemsTotal}`
+    );
     window.location.href = `https://wa.me/5491173607946?text=${finalMessage}`;
   }
 

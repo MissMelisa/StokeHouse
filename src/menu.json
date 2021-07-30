@@ -6,78 +6,79 @@
         "id": 1,
         "name": "Cheeseburger",
         "image": "Images/burgerdoble.jpg",
-        "ingredients": ["pan", "carne 125gr", "papas fritas"],
-        "sizes": { "simple": 460, "Doble": 540, "Triples": 620 }
+        "ingredients": ["carne 125gr"],
+        "sizes": { "simple": 460, "Doble": 540, "Triples": 620 },
+        "options": {
+          "Pan": ["Pan de papa", "Pan de queso"],
+          "Guarnicion": ["Papa fritas", "Batatas fritas"]
+        }
       },
       {
         "id": 2,
         "name": "Classic",
         "image": "Images/classic.jpeg",
         "ingredients": [
-          "pan",
           "carne 125gr",
           "creddar",
           "tomate",
           "lechuga",
-          "cebolla",
-          "papas fritas"
+          "cebolla"
         ],
-        "sizes": { "simple": 480, "Doble": 560 }
+        "sizes": { "simple": 480, "Doble": 560 },
+        "options": {
+          "Pan": ["Pan de papa", "Pan de queso"],
+          "Guarnicion": ["Papa fritas", "Batatas fritas"]
+        }
       },
       {
         "id": 3,
         "name": "Sweetmeat",
         "image": "Images/sweetmeat.jpg",
-        "ingredients": [
-          "pan",
-          "carne 125gr",
-          "cebolla caramelizada",
-          "cheddar",
-          "papas fritas"
-        ],
-        "sizes": { "simple": 470, "doble": 550, "triples": 630 }
+        "ingredients": ["carne 125gr", "cebolla caramelizada", "cheddar"],
+        "sizes": { "simple": 470, "doble": 550, "triples": 630 },
+        "options": {
+          "Pan": ["Pan de papa", "Pan de queso"],
+          "Guarnicion": ["Papa fritas", "Batatas fritas"]
+        }
       },
       {
         "id": 4,
         "name": "Veggie",
         "image": "Images/veggie.jpg",
-        "ingredients": [
-          "pan",
-          "medallon de lenteja",
-          "tomate",
-          "lechuga",
-          "papas fritas"
-        ],
-        "sizes": { "simple": 430, "doble": 510 }
+        "ingredients": ["medallon de lenteja", "tomate", "lechuga"],
+        "sizes": { "simple": 430, "doble": 510 },
+        "options": {
+          "Pan": ["Pan de papa", "Pan de queso"],
+          "Guarnicion": ["Papa fritas", "Batatas fritas"]
+        }
       },
       {
         "id": 5,
         "name": "Grilled onion",
         "image": "Images/onion.jpg",
-        "ingredients": [
-          "pan",
-          "carne 125gr",
-          "cheddar",
-          "bacon",
-          "cebolla grillada",
-          "papas fritas"
-        ],
-        "sizes": { "simple": 500, "doble": 580, "triples": 660 }
+        "ingredients": ["carne 125gr", "cheddar", "bacon", "cebolla grillada"],
+        "sizes": { "simple": 500, "doble": 580, "triples": 660 },
+        "options": {
+          "Pan": ["Pan de papa", "Pan de queso"],
+          "Guarnicion": ["Papa fritas", "Batatas fritas"]
+        }
       },
       {
         "id": 6,
         "name": "Bully burger",
         "image": "https://media-cdn.tripadvisor.com/media/photo-s/0e/40/91/8b/hamburguesa-con-queso.jpg",
         "ingredients": [
-          "pan",
           "carne 125gr",
           "cheddar",
           "huevo",
           "cebolla caramelizada",
-          "bacon barbacoa",
-          "papas fritas"
+          "bacon barbacoa"
         ],
-        "sizes": { "simple": 560, "doble": 650, "triples": 730 }
+        "sizes": { "simple": 560, "doble": 650, "triples": 730 },
+        "options": {
+          "Pan": ["Pan de papa", "Pan de queso"],
+          "Guarnicion": ["Papa fritas", "Batatas fritas"]
+        }
       }
     ]
   },
@@ -90,28 +91,44 @@
         "name": "Combo 1",
         "image": "Images/burgerdoble.jpg",
         "ingredients": ["Dos Cheese burger doble", "papas fritas "],
-        "sizes": { "Doble": 1040 }
+        "sizes": { "Doble": 1040 },
+        "options": {
+          "Pan": ["Pan de papa", "Pan de queso"],
+          "Guarnicion": ["Papa fritas", "Batatas fritas"]
+        }
       },
       {
         "id": 2,
         "name": "Combo 2",
         "image": "Images/cheeseburger.jpeg",
-        "ingredients": ["Dos Burgers Classic ", "Papas fritas"],
-        "sizes": { "simple": 920 }
+        "ingredients": ["Dos Burgers Classic "],
+        "sizes": { "simple": 920 },
+        "options": {
+          "Pan": ["Pan de papa", "Pan de queso"],
+          "Guarnicion": ["Papa fritas", "Batatas fritas"]
+        }
       },
       {
         "id": 3,
         "name": "Combo 3",
         "image": "Images/burgerdoble.jpg",
-        "ingredients": ["Cuatro Cheese burger simple", "Papas fritas"],
-        "sizes": { "simple": 1760 }
+        "ingredients": ["Cuatro Cheese burger simple"],
+        "sizes": { "simple": 1760 },
+        "options": {
+          "Pan": ["Pan de papa", "Pan de queso"],
+          "Guarnicion": ["Papa fritas", "Batatas fritas"]
+        }
       },
       {
         "id": 4,
         "name": "Combo 4",
         "image": "Images/sweetmeat.jpg",
-        "ingredients": ["Dos Sweetmeat", "Papas fritas"],
-        "sizes": { "simple": 900 }
+        "ingredients": ["Dos Sweetmeat"],
+        "sizes": { "simple": 900 },
+        "options": {
+          "Pan": ["Pan de papa", "Pan de queso"],
+          "Guarnicion": ["Papa fritas", "Batatas fritas"]
+        }
       }
     ]
   },
@@ -122,26 +139,34 @@
         "id": 1,
         "name": "Combo infantil",
         "image": "Images/burgerdoble.jpg",
-        "ingredients": ["Cheese burger,papas fritas y Pepsi/SevenUp"],
-        "sizes": { "simple": 520 }
+        "ingredients": ["Cheese burger y Pepsi/SevenUp"],
+        "sizes": { "simple": 520 },
+        "options": {
+          "Pan": ["Pan de papa", "Pan de queso"],
+          "Guarnicion": ["Papa fritas", "Batatas fritas"]
+        }
       },
       {
         "id": 2,
         "name": "Combo cervezero",
         "image": "Images/cheeseburger.jpeg",
-        "ingredients": [
-          "Cheese burger doble",
-          "Papas fritas",
-          "Cerveza Brahma"
-        ],
-        "sizes": { "simple": 680 }
+        "ingredients": ["Cheese burger doble", "Cerveza Brahma"],
+        "sizes": { "simple": 680 },
+        "options": {
+          "Pan": ["Pan de papa", "Pan de queso"],
+          "Guarnicion": ["Papa fritas", "Batatas fritas"]
+        }
       },
       {
         "id": 3,
         "name": "Combo gaseosa",
         "image": "Images/burgerdoble.jpg",
-        "ingredients": ["Cheese burger doble", "Papas fritas", "Pepsi/SevenUp"],
-        "sizes": { "simple": 620 }
+        "ingredients": ["Cheese burger doble", "Pepsi/SevenUp"],
+        "sizes": { "simple": 620 },
+        "options": {
+          "Pan": ["Pan de papa", "Pan de queso"],
+          "Guarnicion": ["Papa fritas", "Batatas fritas"]
+        }
       }
     ]
   },
@@ -260,16 +285,10 @@
     "name": "Postres",
     "items": [
       {
-        "name": " Chocotorta",
+        "name": " Postres",
         "ingredients": [],
         "image": "http://www.cookiesundays.org/wp-content/uploads/2015/09/chocotorta.jpeg",
-        "sizes": { "Chocotorta ": 260 }
-      },
-      {
-        "name": " Bomba Oreo",
-        "ingredients": [],
-        "image": "https://img-global.cpcdn.com/recipes/0f32deac7b31e8f1/1200x630cq70/photo.jpg",
-        "sizes": { "Bomba Oreo ": 250 }
+        "sizes": { "Chocotorta ": 260, "Bomba Oreo ": 250 }
       }
     ]
   }

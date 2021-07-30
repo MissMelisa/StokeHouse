@@ -230,6 +230,7 @@ function MainPage() {
         {detail && (
           <CardItem
             open={open.openCartItem}
+            options={detail.options}
             setOpen={() => handleSetOpen("openCartItem")}
             image={detail.image}
             nameItem={detail.name}

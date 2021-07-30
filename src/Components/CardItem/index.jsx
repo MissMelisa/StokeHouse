@@ -13,6 +13,7 @@ import {
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
+import FoodItemOptions from "../FoodItemOptions";
 
 const useStyles = makeStyles({
   modal: {
@@ -109,11 +110,13 @@ function CardItem({
   ingredients,
   nameItem,
   onClickAddItem,
+  options,
 }) {
   const classes = useStyles();
 
   const [excludedItems, setExludedItems] = useState([]);
   const [selectedSize, setSelectedSize] = useState({});
+  const [selectedOptions, setSelectedOptions] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState(false);
 
@@ -138,6 +141,10 @@ function CardItem({
     setSelectedSize({ size, price });
   }
 
+  function handleOnOptions(title, option) {
+    setSelectedOptions((prevState) => ({ ...prevState, [title]: option }));
+  }
+
   function handleOnClickAdd() {
     const orderItem = {
       nameItem,
@@ -145,7 +152,9 @@ function CardItem({
       excludedItems,
       image,
       quantity,
+      options,
     };
+
     if (!selectedSize.size) {
       setError(true);
       return;
@@ -205,7 +214,7 @@ function CardItem({
             </div>
 
             <div className={classes.size}>
-              <span className={classes.spanTitle}>Opciones</span>
+              <span className={classes.spanTitle}>Tamaño</span>
               <ButtonGroup
                 size="large"
                 variant="text"
@@ -213,7 +222,6 @@ function CardItem({
                 color="primary"
                 aria-label="vertical outlined primary button group"
               >
-                {}
                 {Object.entries(sizes).map((size) => {
                   const [key, price] = size;
 
@@ -235,6 +243,21 @@ function CardItem({
                   Selecciona el tamaño
                 </span>
               )}
+            </div>
+            <div className={classes.size}>
+              {Object.entries(options).map((option) => {
+                const [title, values] = option;
+
+                return (
+                  <FoodItemOptions
+                    error={error}
+                    selectedOption={selectedOptions[title]}
+                    title={title}
+                    options={values}
+                    onClick={handleOnOptions}
+                  />
+                );
+              })}
             </div>
 
             <TextField
