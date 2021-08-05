@@ -32,6 +32,7 @@ export default function FoodItemOptions({
   error,
 }) {
   const classes = useStyles();
+
   return (
     <div className={classes.buttonFoodItem}>
       <Typography className={classes.spanTitle}>{title}</Typography>
@@ -57,7 +58,7 @@ export default function FoodItemOptions({
 
       {error === true && (
         <span className={classes.errorMessage}>
-          Selecciona el pan y guarnicion.
+          Selecciona el pan y/o guarnicion.
         </span>
       )}
     </div>

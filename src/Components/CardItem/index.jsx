@@ -119,7 +119,7 @@ function CardItem({
   const [excludedIngredients, setExludedIngredients] = useState([]);
   const [selectedSize, setSelectedSize] = useState({
     size: objectSizes[0][0],
-    prize: objectSizes[0][1],
+    price: objectSizes[0][1],
   });
   const [selectedOptions, setSelectedOptions] = useState({});
   const [quantity, setQuantity] = useState(1);
@@ -147,8 +147,10 @@ function CardItem({
   }
 
   function handleOnOptions(title, option) {
+    setError(false);
     setSelectedOptions((prevState) => ({ ...prevState, [title]: option }));
   }
+  console.log(selectedOptions);
 
   function handleOnClickAdd() {
     const orderItem = {
@@ -160,7 +162,11 @@ function CardItem({
       selectedOptions,
     };
 
-    if (!selectedSize.size) {
+    if (
+      !selectedSize.size
+      // !selectedOptions.pan &&
+      // !selectedOptions.guarnicion
+    ) {
       setError(true);
       return;
     }
@@ -169,6 +175,7 @@ function CardItem({
     setOpen(false);
     setExludedIngredients([]);
     setSelectedSize({});
+    setSelectedOptions({});
   }
   const theme = useTheme();
 
