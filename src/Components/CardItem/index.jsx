@@ -107,7 +107,6 @@ function CardItem({
   setOpen,
   image,
   sizes,
-  ingredients,
   description,
   nameItem,
   onClickAddItem,
@@ -175,7 +174,6 @@ function CardItem({
   function handleOnChangeQuantity(ev) {
     setQuantity(parseInt(ev.target.value));
   }
-  console.log(excludedItems);
 
   return (
     <Dialog
