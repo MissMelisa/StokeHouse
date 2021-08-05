@@ -115,9 +115,12 @@ function CardItem({
   id,
 }) {
   const classes = useStyles();
-
+  const objectSizes = Object.entries(sizes);
   const [excludedIngredients, setExludedIngredients] = useState([]);
-  const [selectedSize, setSelectedSize] = useState({});
+  const [selectedSize, setSelectedSize] = useState({
+    size: objectSizes[0][0],
+    prize: objectSizes[0][1],
+  });
   const [selectedOptions, setSelectedOptions] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState(false);
@@ -215,37 +218,39 @@ function CardItem({
                 </div>
               ))}
             </div>
+            {objectSizes.length > 1 && (
+              <div className={classes.size}>
+                <span className={classes.spanTitle}>Tamaño</span>
+                <ButtonGroup
+                  orientation="vertical"
+                  variant="contained"
+                  color="primary"
+                  aria-label="vertical outlined primary button group"
+                >
+                  {objectSizes.map((size) => {
+                    const [key, price] = size;
 
-            <div className={classes.size}>
-              <span className={classes.spanTitle}>Tamaño</span>
-              <ButtonGroup
-                orientation="vertical"
-                variant="contained"
-                color="primary"
-                aria-label="vertical outlined primary button group"
-              >
-                {Object.entries(sizes).map((size) => {
-                  const [key, price] = size;
+                    return (
+                      <Button
+                        onClick={() => handleOnClickSelected(size)}
+                        color="primary"
+                        variant={
+                          key === selectedSize.size ? "contained" : "outline"
+                        }
+                      >
+                        {key} $ {price}
+                      </Button>
+                    );
+                  })}
+                </ButtonGroup>
+                {error === true && (
+                  <span className={classes.errorMessage}>
+                    Selecciona el tamaño
+                  </span>
+                )}
+              </div>
+            )}
 
-                  return (
-                    <Button
-                      onClick={() => handleOnClickSelected(size)}
-                      color="primary"
-                      variant={
-                        key === selectedSize.size ? "contained" : "outline"
-                      }
-                    >
-                      {key} $ {price}
-                    </Button>
-                  );
-                })}
-              </ButtonGroup>
-              {error === true && (
-                <span className={classes.errorMessage}>
-                  Selecciona el tamaño
-                </span>
-              )}
-            </div>
             <div className={classes.size}>
               {Object.entries(options).map((option) => {
                 const [title, values] = option;
