@@ -141,8 +141,9 @@
       {
         "id": 11,
         "name": "Combo infantil",
+        "description": "Cheese simple con guarnicion",
         "image": "Images/burgerdoble.jpg",
-        "excludedItems": [],
+        "excludedItems": ["Pepsi", "Seven Up"],
         "sizes": { "simple": 520 },
         "options": {
           "Pan": ["Pan de papa", "Pan de queso"],
@@ -153,6 +154,7 @@
         "id": 12,
         "name": "Combo cervezero",
         "image": "Images/cheeseburger.jpeg",
+        "description": "Cheese doble, cerveza Brahama y guarnicion",
         "excludedItems": [],
         "sizes": { "simple": 680 },
         "options": {
@@ -164,7 +166,8 @@
         "id": 13,
         "name": "Combo gaseosa",
         "image": "Images/burgerdoble.jpg",
-        "excludedItems": [],
+        "description": "Cheese doble con guarnicion",
+        "excludedItems": ["Pepsi", "Seven Up"],
         "sizes": { "simple": 620 },
         "options": {
           "Pan": ["Pan de papa", "Pan de queso"],
