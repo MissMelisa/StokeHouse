@@ -150,7 +150,7 @@ function CardItem({
     setError(false);
     setSelectedOptions((prevState) => ({ ...prevState, [title]: option }));
   }
-  console.log(selectedOptions);
+  console.log(selectedSize);
 
   function handleOnClickAdd() {
     const orderItem = {
@@ -288,7 +288,7 @@ function CardItem({
             onClick={handleOnClickAdd}
             size="medium"
           >
-            Agregar
+            Agregar ${selectedSize.price}
           </Button>
         </div>
       </div>
