@@ -58,7 +58,7 @@ export default function FoodItemOptions({
 
       {error === true && (
         <span className={classes.errorMessage}>
-          Selecciona el pan y/o guarnicion.
+          Selecciona el {selectedOption[title]}.
         </span>
       )}
     </div>

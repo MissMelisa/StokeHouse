@@ -112,7 +112,6 @@ function CardItem({
   onClickAddItem,
   options,
   excludedItems,
-  id,
 }) {
   const classes = useStyles();
   const objectSizes = Object.entries(sizes);
@@ -132,12 +131,14 @@ function CardItem({
     if (event.target.checked) {
       setExludedIngredients([...excludedIngredients, event.target.name]);
     } else {
-      const newArray = excludedIngredients.filter((ingredient) => {
-        return ingredient !== event.target.name;
+      const newArray = excludedIngredients.filter((excludedIngredient) => {
+        return excludedIngredient !== event.target.name;
       });
+
       setExludedIngredients(newArray);
     }
   };
+  console.log(excludedIngredients);
 
   function handleOnClickSelected(selected) {
     const [size, price] = selected;
@@ -150,7 +151,6 @@ function CardItem({
     setError(false);
     setSelectedOptions((prevState) => ({ ...prevState, [title]: option }));
   }
-  console.log(selectedSize);
 
   function handleOnClickAdd() {
     const orderItem = {
@@ -162,11 +162,7 @@ function CardItem({
       selectedOptions,
     };
 
-    if (
-      !selectedSize.size
-      // !selectedOptions.pan &&
-      // !selectedOptions.guarnicion
-    ) {
+    if (!selectedSize.size) {
       setError(true);
       return;
     }
@@ -215,7 +211,7 @@ function CardItem({
                   <FormControlLabel
                     control={
                       <Checkbox
-                        name={excludedItems}
+                        name={excludedItem}
                         checked={excludedIngredients.includes(excludedItem)}
                         onChange={handleChange}
                       />

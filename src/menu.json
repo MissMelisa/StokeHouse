@@ -19,7 +19,7 @@
         "name": "Classic",
         "image": "Images/classic.jpeg",
         "description": "carne 125gr, cheddar,tomate, lechuga y cebolla",
-        "excludedItems": ["creddar", "tomate", "lechuga", "cebolla"],
+        "excludedItems": ["cheddar", "tomate", "lechuga", "cebolla"],
         "sizes": { "simple": 480, "Doble": 560 },
         "options": {
           "Pan": ["Pan de papa", "Pan de queso"],
