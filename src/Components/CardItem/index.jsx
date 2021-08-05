@@ -108,14 +108,16 @@ function CardItem({
   image,
   sizes,
   ingredients,
+  description,
   nameItem,
   onClickAddItem,
   options,
+  excludedItems,
   id,
 }) {
   const classes = useStyles();
 
-  const [excludedItems, setExludedItems] = useState([]);
+  const [excludedIngredients, setExludedIngredients] = useState([]);
   const [selectedSize, setSelectedSize] = useState({});
   const [selectedOptions, setSelectedOptions] = useState({});
   const [quantity, setQuantity] = useState(1);
@@ -126,12 +128,12 @@ function CardItem({
   };
   const handleChange = (event) => {
     if (event.target.checked) {
-      setExludedItems([...excludedItems, event.target.name]);
+      setExludedIngredients([...excludedIngredients, event.target.name]);
     } else {
-      const newArray = excludedItems.filter((ingredient) => {
+      const newArray = excludedIngredients.filter((ingredient) => {
         return ingredient !== event.target.name;
       });
-      setExludedItems(newArray);
+      setExludedIngredients(newArray);
     }
   };
 
@@ -150,7 +152,7 @@ function CardItem({
     const orderItem = {
       nameItem,
       selectedSize,
-      excludedItems,
+      excludedItems: excludedIngredients,
       image,
       quantity,
       selectedOptions,
@@ -163,7 +165,7 @@ function CardItem({
 
     onClickAddItem(orderItem);
     setOpen(false);
-    setExludedItems([]);
+    setExludedIngredients([]);
     setSelectedSize({});
   }
   const theme = useTheme();
@@ -173,6 +175,7 @@ function CardItem({
   function handleOnChangeQuantity(ev) {
     setQuantity(parseInt(ev.target.value));
   }
+  console.log(excludedItems);
 
   return (
     <Dialog
@@ -188,27 +191,28 @@ function CardItem({
         <div className={classes.data}>
           <span className={classes.containerImage}>
             <span className={classes.spanTitle}>Ingredientes </span>
-            <span className={classes.spanIngredients}>
-              {!!ingredients ? ingredients.join() : ""}
-            </span>
+            <span className={classes.spanIngredients}>{description}</span>
 
             <img src={image} alt={nameItem} className={classes.image} />
           </span>
 
           <div className={classes.span}>
             <div className={classes.data}>
-              <span className={classes.spanTitle}>Excluir</span>
-              {ingredients.map((ingredient) => (
+              {excludedItems.length >= 1 && (
+                <span className={classes.spanTitle}>Excluir</span>
+              )}
+
+              {excludedItems.map((excludedItem) => (
                 <div className={classes.checkbox}>
                   <FormControlLabel
                     control={
                       <Checkbox
-                        name={ingredient}
-                        checked={excludedItems.includes(ingredient)}
+                        name={excludedItems}
+                        checked={excludedIngredients.includes(excludedItem)}
                         onChange={handleChange}
                       />
                     }
-                    label={ingredient}
+                    label={excludedItem}
                   />
                 </div>
               ))}

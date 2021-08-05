@@ -218,9 +218,7 @@ function MainPage() {
                     onClick={() => handleOnClick(item)}
                     image={item.image}
                     itemName={item.name}
-                    ingredients={
-                      !!item.ingredients ? item.ingredients.join() : ""
-                    }
+                    ingredients={item.description}
                     sizes={item.sizes}
                   />
                 ))}
@@ -237,7 +235,8 @@ function MainPage() {
             setOpen={() => handleSetOpen("openCartItem")}
             image={detail.image}
             nameItem={detail.name}
-            ingredients={detail.ingredients}
+            description={detail.description}
+            excludedItems={detail.excludedItems}
             sizes={detail.sizes}
             onClickAddItem={handleOnClickCart}
           />

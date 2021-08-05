@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 function OrderItem({
   nameItem,
   id,
+  description,
   excludedItems,
   image,
   price,
@@ -48,6 +49,7 @@ function OrderItem({
       <div className={classes.orderItemContainer}>
         <img src={image} alt={nameItem} className={classes.image} />
         <Typography className={classes.itemData}>{nameItem}</Typography>
+        <Typography className={classes.itemData}>{description}</Typography>
         <Typography className={classes.itemData}>{excludedItems}</Typography>
         <Typography className={classes.itemData}>{size}</Typography>
         <Typography className={classes.itemData}>

@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   },
 });
 
-function FoodItem({ image, itemName, ingredients, sizes, onClick }) {
+function FoodItem({ image, itemName, description, sizes, onClick }) {
   const classes = useStyles();
   const defaultSize = Object.values(sizes)[0];
 
@@ -53,11 +53,7 @@ function FoodItem({ image, itemName, ingredients, sizes, onClick }) {
       </div>
 
       <Typography className={classes.ingredients}>
-        {ingredients.length >= 30 ? (
-          <Typography> {ingredients.substring(0, 30)}... </Typography>
-        ) : (
-          <Typography>{ingredients}</Typography>
-        )}
+        <Typography>{description}</Typography>
       </Typography>
     </div>
   );
