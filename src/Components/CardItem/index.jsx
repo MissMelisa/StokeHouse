@@ -138,7 +138,6 @@ function CardItem({
       setExludedIngredients(newArray);
     }
   };
-  console.log(excludedIngredients);
 
   function handleOnClickSelected(selected) {
     const [size, price] = selected;

@@ -54,6 +54,7 @@ const useStyles = makeStyles({
     minHeight: "60px",
     display: "flex",
     alignItems: "center",
+    flexDirection: "column",
     fontWeight: "bolder",
     padding: "15px",
     marginBottom: "20px",
@@ -98,6 +99,9 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+  },
+  delivery: {
+    color: "red",
   },
 });
 
@@ -254,6 +258,9 @@ function CheckOutPage() {
               subTotal = subTotal + cart.quantity * cart.selectedSize.price;
               return subTotal;
             }, 0)}
+            <Typography variant="subtitle2" className={classes.delivery}>
+              *el precio es sin costo de envio
+            </Typography>
           </span>
           <Button type="submit" className={classes.sendWhatsApp} size="medium">
             <Typography>Enviar pedido por WhatsApp</Typography>
