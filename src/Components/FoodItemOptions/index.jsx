@@ -37,7 +37,7 @@ export default function FoodItemOptions({
       <Typography className={classes.spanTitle}>{title}</Typography>
       <ButtonGroup
         size="large"
-        variant="text"
+        variant="contained"
         orientation="vertical"
         color="primary"
         className={classes.buttonGroup}

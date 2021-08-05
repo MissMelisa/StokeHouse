@@ -221,9 +221,8 @@ function CardItem({
             <div className={classes.size}>
               <span className={classes.spanTitle}>Tamaño</span>
               <ButtonGroup
-                size="large"
-                variant="text"
                 orientation="vertical"
+                variant="contained"
                 color="primary"
                 aria-label="vertical outlined primary button group"
               >
