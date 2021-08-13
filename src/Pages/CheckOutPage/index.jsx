@@ -135,7 +135,7 @@ function CheckOutPage() {
     cart.forEach((item) => {
       intro += `${item.quantity} ${item.nameItem} ${
         item.selectedSize.size
-      } con ${Object.values(item.selectedOptions)}\n`;
+      } : ${Object.values(item.selectedOptions)}\n`;
 
       // intro -> hola, me gustaria realizar una orden + 4 cheeseburger XL, 2 big mac M
 
@@ -172,6 +172,7 @@ function CheckOutPage() {
           </Typography>
           {cart.map((item) => (
             <OrderItem
+              key={item.id}
               updateQuantity={updateItemQuantity}
               handleOnDelete={handleOnDelete}
               nameItem={item.nameItem}

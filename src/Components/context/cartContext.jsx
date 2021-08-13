@@ -26,8 +26,10 @@ function CartProvider({ children }) {
   }, [cart]);
 
   function addNewItem(orderItem) {
-    orderItem.id = cart.length + 1;
-    setCart([...cart, orderItem]);
+    setCart((prevState) => {
+      orderItem.id = prevState.length + 1;
+      return [...prevState, orderItem];
+    });
   }
 
   function updateItemQuantity(quantity, id) {

@@ -46,6 +46,7 @@ export default function FoodItemOptions({
       >
         {options.map((option) => (
           <Button
+            key={option}
             className={classes.buttonFoodItem}
             onClick={() => onClick(title, option)}
             color="primary"

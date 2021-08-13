@@ -210,6 +210,7 @@ function CardItem({
                   <FormControlLabel
                     control={
                       <Checkbox
+                        key={excludedItem}
                         name={excludedItem}
                         checked={excludedIngredients.includes(excludedItem)}
                         onChange={handleChange}
@@ -234,6 +235,7 @@ function CardItem({
 
                     return (
                       <Button
+                        key={key}
                         onClick={() => handleOnClickSelected(size)}
                         color="primary"
                         variant={
@@ -259,6 +261,7 @@ function CardItem({
 
                 return (
                   <FoodItemOptions
+                    key={title}
                     error={error}
                     selectedOption={selectedOptions[title]}
                     title={title}
