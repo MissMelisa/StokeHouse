@@ -123,6 +123,7 @@ function MainPage() {
   }
 
   function handleOnClickCart(orderItem) {
+    console.log({ orderItem });
     addNewItem(orderItem);
     handleSetOpen("openCart");
   }
@@ -135,6 +136,7 @@ function MainPage() {
   function handleOnReDirectInstagram() {
     window.location.href = "https://www.instagram.com/stokehouse.burger/";
   }
+
   return (
     <div className={classes.page}>
       <div className={classes.header}>

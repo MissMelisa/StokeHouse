@@ -26,6 +26,7 @@ function CartProvider({ children }) {
   }, [cart]);
 
   function addNewItem(orderItem) {
+    console.log({ orderItem });
     setCart((prevState) => {
       orderItem.id = prevState.length + 1;
       return [...prevState, orderItem];
